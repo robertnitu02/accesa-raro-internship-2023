@@ -19,4 +19,16 @@ export class WeatherService {
       `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIConstants.weatherApiMapKey}&units=${APIConstants.units}`
     );
   }
+
+  getForecastByDays(cityName: string, numOfDays: number) {
+    return this.http.get(
+      `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&cnt=${numOfDays}&appid=${APIConstants.weatherApiMapKey}&units=${APIConstants.units}`
+    );
+  }
+
+  getForecastByHours(cityName: string, numOfHours: number) {
+    return this.http.get(
+      `https://api.openweathermap.org/data/2.5/forecast/hourly?q=${cityName}&cnt=${numOfHours}&appid=${APIConstants.weatherApiMapKey}&units=${APIConstants.units}`
+    );
+  }
 }

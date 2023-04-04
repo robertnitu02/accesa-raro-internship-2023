@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
   }
 
   change(): void {
-    this.getWeatherByCityName(this.city);
+    this.getForecastByDays();
   }
 
   initWeatherByLocation() {
@@ -72,6 +72,19 @@ export class AppComponent implements OnInit {
       next: (res) => {
         this.myWeather = res;
         console.log(`getWeatherByCoordinates: ${this.myWeather}`);
+        this.myWeatherStringify = JSON.stringify(res);
+      },
+      error: (error) => console.log(error.message),
+      complete: () => console.log('API Call Completed'),
+    });
+  }
+
+  getForecastByDays() {
+    this.weatherService.getForecastByDays(this.city, 5).subscribe({
+      next: (res) => {
+        this.myWeather = res;
+        console.log(`getForecastByDays: ${this.myWeather}`);
+        console.log(`days: ${JSON.stringify(this.myWeather.list[0])}`);
         this.myWeatherStringify = JSON.stringify(res);
       },
       error: (error) => console.log(error.message),
