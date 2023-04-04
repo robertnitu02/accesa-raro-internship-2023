@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { environment } from '../environments/environment';
+import { APIConstants } from '../shared/constants/constants';
 
 @Injectable({
   providedIn: 'root',
@@ -8,9 +8,15 @@ import { environment } from '../environments/environment';
 export class WeatherService {
   constructor(private http: HttpClient) {}
 
-  getWeather(cityName: string) {
+  getWeatherByCityName(cityName: string) {
     return this.http.get(
-      `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${environment.WeatherApiMapKey}&units=metric`
+      `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${APIConstants.weatherApiMapKey}&units=${APIConstants.units}`
+    );
+  }
+
+  getWeatherByCoordinates(lat: number, lon: number) {
+    return this.http.get(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIConstants.weatherApiMapKey}&units=${APIConstants.units}`
     );
   }
 }

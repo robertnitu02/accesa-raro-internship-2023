@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {WeatherService} from "../services/weather.service";
+import { Component, OnInit } from '@angular/core';
+import { WeatherService } from '../services/weather.service';
+import { constants } from '../shared/constants/constants';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
   title = 'weather-application';
@@ -12,31 +13,69 @@ export class AppComponent implements OnInit {
   myWeather: any;
   myWeatherStringify: any;
 
-  constructor(private weatherService: WeatherService) {
-  }
+  lat: number = -1;
+  lon: number = -1;
+
+  constructor(private weatherService: WeatherService) {}
 
   ngOnInit() {
-    this.weatherService.getWeather(this.city).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.myWeather = res;
-        console.log(this.myWeather);
-      },
-      error: (error) => console.log(error.message),
-      complete: () => console.log('API Call Completed')
-    })
+    this.initWeatherByLocation();
   }
 
   change(): void {
-    this.weatherService.getWeather(this.city).subscribe({
+    this.getWeatherByCityName(this.city);
+  }
+
+  initWeatherByLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position: any) => {
+          if (position) {
+            // console.log(
+            //   `lat: ${position.coords.latitude} | lon: ${position.coords.longitude}`
+            // );
+            this.lat = position.coords.latitude;
+            this.lon = position.coords.longitude;
+            this.getWeatherByCoordinates();
+          } else {
+            this.city = constants.startupCity;
+            this.getWeatherByCityName(this.city);
+          }
+        },
+        (error: any) => {
+          console.log(error);
+          this.city = constants.startupCity;
+          this.getWeatherByCityName(this.city);
+        }
+      );
+    } else {
+      alert('Geolocation is not supported by this browser.');
+      this.city = constants.startupCity;
+      this.getWeatherByCityName(this.city);
+    }
+  }
+
+  getWeatherByCityName(cityName: string) {
+    this.weatherService.getWeatherByCityName(cityName).subscribe({
       next: (res) => {
-        console.log(res);
         this.myWeather = res;
-        console.log(this.myWeather);
+        console.log(`getWeatherByCityName: ${this.myWeather}`);
         this.myWeatherStringify = JSON.stringify(res);
       },
       error: (error) => console.log(error.message),
-      complete: () => console.log('API Call Completed')
-    })
+      complete: () => console.log('API Call Completed'),
+    });
+  }
+
+  getWeatherByCoordinates() {
+    this.weatherService.getWeatherByCoordinates(this.lat, this.lon).subscribe({
+      next: (res) => {
+        this.myWeather = res;
+        console.log(`getWeatherByCoordinates: ${this.myWeather}`);
+        this.myWeatherStringify = JSON.stringify(res);
+      },
+      error: (error) => console.log(error.message),
+      complete: () => console.log('API Call Completed'),
+    });
   }
 }
