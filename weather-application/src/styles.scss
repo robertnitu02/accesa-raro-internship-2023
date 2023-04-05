@@ -1,0 +1,21 @@
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  overflow: hidden;
+  user-select: none;
+  margin: 0;
+  font-family: Mulish, "Helvetica Neue", sans-serif !important;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+a {
+  color: white;
+  text-decoration: none;
+}
