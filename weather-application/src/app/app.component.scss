@@ -1,3 +1,5 @@
+@use '@angular/material' as mat;
+@use '../shared/styles/variables' as colors;
 
 .app {
   display: grid;
@@ -19,7 +21,7 @@
       place-items: center;
 
       span {
-        color: white;
+        color: colors.$white;
       }
     }
   }
@@ -28,6 +30,7 @@
     display: grid;
     place-items: center;
     .weather {
+      @include mat.elevation(2);
       width: 700px;
       height: 700px;
       @media only screen and (max-width: 600px) {
@@ -44,7 +47,7 @@
     place-items: center;
 
     .info {
-      color: white;
+      color: colors.$white;
       font-size: 0.7rem;
     }
   }
