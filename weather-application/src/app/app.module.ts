@@ -5,10 +5,12 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { WeatherSearchComponent } from './weather-search/weather-search.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    WeatherSearchComponent
   ],
   imports: [
     BrowserModule,

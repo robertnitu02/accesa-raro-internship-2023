@@ -10,7 +10,15 @@
   </div>
   <div class="content night__content">
     <div class="weather">
-
+      <ng-container *ngIf="currentViewState === viewStates.HOME">
+        <div class="search">
+          <input type="text" placeholder="Insert a City name" value="{{this.city}}" [(ngModel)]="inputText">
+          <button (click)="search()">Search</button>
+        </div>
+        <ng-container *ngIf="this.viewWeatherByCity">
+          <app-weather-search [weatherModel]="this.myWeather"></app-weather-search>
+        </ng-container>
+      </ng-container>
     </div>
   </div>
   <div class="footer night__content">

@@ -4,6 +4,11 @@ import { constants } from '../shared/constants/constants';
 import { WeatherModel } from '../shared/models/weather.model';
 import { WeatherForecastModel } from '../shared/models/weather-forecast.model';
 
+export enum ViewState {
+  HOME,
+  FAVORITES,
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,9 +16,16 @@ import { WeatherForecastModel } from '../shared/models/weather-forecast.model';
 })
 export class AppComponent implements OnInit {
   title = 'weather-application';
+  viewStates = ViewState;
+
+  currentViewState = this.viewStates.HOME;
+  viewWeatherByCity = false;
+
   city: string = constants.startupCity;
   myWeather: WeatherModel | undefined = undefined;
   myWeatherForecast: WeatherForecastModel | undefined = undefined;
+
+  inputText: string = this.city;
 
   myWeatherStringify: any;
   myWeatherForecastStringify: any;
@@ -25,6 +37,15 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.initWeather();
+  }
+
+  search(): void {
+    this.viewWeatherByCity = false;
+    setTimeout(() => {
+      this.viewWeatherByCity = true;
+    }, 1000);
+    this.city = this.inputText;
+    this.getWeather(this.city);
   }
 
   /* --- Init Weather first Connect */
@@ -58,6 +79,7 @@ export class AppComponent implements OnInit {
         this.myWeather = res;
         if (lat !== -1 && lon !== -1) {
           this.city = this.myWeather.name;
+          this.inputText = this.city;
         }
         console.log(`getWeather: ${this.myWeather}`);
         this.myWeatherStringify = JSON.stringify(res);
