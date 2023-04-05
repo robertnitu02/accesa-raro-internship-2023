@@ -1,5 +1,5 @@
 @use '@angular/material' as mat;
-@use '../shared/styles/variables' as colors;
+@use '../shared/styles/variables' as variables;
 
 .app {
   display: grid;
@@ -13,7 +13,7 @@
     .buttons {
       display: grid;
       grid-template-columns: 10% 10% 70% 5% 5%;
-      @media only screen and (max-width: 600px) {
+      @media only screen and (max-width: variables.$responsive-max-width) {
         grid-template-columns: repeat(5, 1fr);
       }
       width: 100%;
@@ -21,7 +21,7 @@
       place-items: center;
 
       span {
-        color: colors.$white;
+        color: variables.$white;
       }
     }
   }
@@ -33,11 +33,11 @@
       display: grid;
       grid-template-rows: 10% auto;
       @include mat.elevation(2);
-      width: 700px;
-      height: 700px;
-      @media only screen and (max-width: 600px) {
-        width: 350px;
-        height: 400px;
+      width: variables.$big-screen-content-width;
+      height: variables.$big-screen-content-height;
+      @media only screen and (max-width: variables.$responsive-max-width) {
+        width: variables.$low-screen-content-width;
+        height: variables.$low-screen-content-height;
       }
       background-color: rgba(255, 255, 255, 0.85);
       border-radius: 2%;
@@ -60,7 +60,7 @@
     place-items: center;
 
     .info {
-      color: colors.$white;
+      color: variables.$white;
       font-size: 0.7rem;
     }
   }

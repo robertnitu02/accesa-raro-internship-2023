@@ -11,12 +11,18 @@ import { WeatherForecastModel } from '../shared/models/weather-forecast.model';
 export class WeatherService {
   constructor(private http: HttpClient) {}
 
-  getWeather(cityName: string, lat = -1, lon = -1): Observable<WeatherModel> {
-    const location =
-      lat === -1 && lon === -1 ? `q=${cityName}` : `lat=${lat}&lon=${lon}`;
+  getWeatherByCoordinates(lat: number, lon: number): Observable<WeatherModel> {
     return this.http.get<WeatherModel>(
       APIConstants.baseUrl +
-        location +
+        `lat=${lat}&lon=${lon}` +
+        `&appid=${APIConstants.weatherApiMapKey}&units=${APIConstants.units}`
+    );
+  }
+
+  getWeather(cityName: string): Observable<WeatherModel> {
+    return this.http.get<WeatherModel>(
+      APIConstants.baseUrl +
+        `q=${cityName}` +
         `&appid=${APIConstants.weatherApiMapKey}&units=${APIConstants.units}`
     );
   }

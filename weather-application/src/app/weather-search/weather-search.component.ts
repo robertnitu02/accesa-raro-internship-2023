@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { WeatherModel } from '../../shared/models/weather.model';
+import { WeatherForecastModel } from '../../shared/models/weather-forecast.model';
 
 @Component({
   selector: 'app-weather-search',
@@ -8,13 +9,17 @@ import { WeatherModel } from '../../shared/models/weather.model';
 })
 export class WeatherSearchComponent implements OnInit {
   @Input() weatherModel: WeatherModel | undefined = undefined;
+  @Input() forecastModel: WeatherForecastModel | undefined = undefined;
 
-  weatherModelStringify: string = '';
+  stringy: string = '';
 
   constructor() {}
 
   ngOnInit(): void {
+    console.log(`weatherModel:`);
     console.log(this.weatherModel);
-    this.weatherModelStringify = JSON.stringify(this.weatherModel);
+    console.log(`forecastModel:`);
+    console.log(this.forecastModel);
+    this.stringy = JSON.stringify(this.forecastModel);
   }
 }

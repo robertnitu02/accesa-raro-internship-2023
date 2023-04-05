@@ -13,15 +13,17 @@
       <ng-container *ngIf="currentViewState === viewStates.HOME">
         <div class="search">
           <input type="text" placeholder="Insert a City name" value="{{this.city}}" [(ngModel)]="inputText">
-          <button (click)="search()">Search</button>
+          <button (click)="getWeatherFromCity()">Search</button>
+          <input type="number" max="7" min="1" [(ngModel)]="inputNumber">
+          <button (click)="getForecast()">Forecast</button>
         </div>
-        <ng-container *ngIf="this.viewWeatherByCity">
-          <app-weather-search [weatherModel]="this.myWeather"></app-weather-search>
+        <ng-container *ngIf="this.showWeather">
+          <app-weather-search [weatherModel]="this.weatherData" [forecastModel]="this.weatherForecastData"></app-weather-search>
         </ng-container>
       </ng-container>
     </div>
   </div>
   <div class="footer night__content">
-    <span class="info">Nițu Robert - Summer Internship Accesa & RaRo 2023 | <a href="https://github.com/robertnitu02/accesa-raro-internship-2023" target="_blank">GitHub</a></span>
+    <span class="info">Nițu Robert - Accesa & RaRo Summer Internship 2023 | <a href="https://github.com/robertnitu02/accesa-raro-internship-2023" target="_blank">GitHub</a></span>
   </div>
 </div>

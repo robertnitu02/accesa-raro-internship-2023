@@ -1,5 +1,5 @@
 export const constants = {
-  startupCity: 'Bucharest',
+  startupCity: 'Pucioasa',
 };
 
 export const APIConstants = {

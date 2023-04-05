@@ -3,6 +3,7 @@ import { WeatherService } from '../services/weather.service';
 import { constants } from '../shared/constants/constants';
 import { WeatherModel } from '../shared/models/weather.model';
 import { WeatherForecastModel } from '../shared/models/weather-forecast.model';
+import { coordinates } from '../shared/models/weather-common.model';
 
 export enum ViewState {
   HOME,
@@ -15,23 +16,25 @@ export enum ViewState {
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  title = 'weather-application';
   viewStates = ViewState;
 
   currentViewState = this.viewStates.HOME;
-  viewWeatherByCity = false;
+  coordinates: coordinates = {
+    lat: -1,
+    lon: -1,
+  };
 
-  city: string = constants.startupCity;
-  myWeather: WeatherModel | undefined = undefined;
-  myWeatherForecast: WeatherForecastModel | undefined = undefined;
+  weatherData: WeatherModel | undefined = undefined;
+  weatherForecastData: WeatherForecastModel | undefined = undefined;
+
+  city: string = '';
+  forecastDays: number = 3;
+  showWeather = false;
+  firstUse = true;
+  showWeatherTimeout: any | undefined = undefined;
 
   inputText: string = this.city;
-
-  myWeatherStringify: any;
-  myWeatherForecastStringify: any;
-
-  lat: number = -1;
-  lon: number = -1;
+  inputNumber: number = 1;
 
   constructor(private weatherService: WeatherService) {}
 
@@ -39,63 +42,101 @@ export class AppComponent implements OnInit {
     this.initWeather();
   }
 
-  search(): void {
-    this.viewWeatherByCity = false;
-    setTimeout(() => {
-      this.viewWeatherByCity = true;
-    }, 1000);
-    this.city = this.inputText;
-    this.getWeather(this.city);
+  getWeatherFromCity(): void {
+    if (!this.firstUse && this.city === this.inputText) return;
+    if (this.showWeatherTimeout) return;
+    if (this.firstUse) this.firstUse = false;
+
+    this.searchForWeatherCityDelay();
+    this.getWeather(this.inputText);
   }
 
-  /* --- Init Weather first Connect */
+  getForecast(): void {
+    console.log(this.forecastDays + ' vs ' + this.inputNumber);
+    if (this.forecastDays === this.inputNumber) return;
+    this.getWeatherForecast(this.city, this.inputNumber);
+  }
+
+  /* --- Init Weather first interaction ---- */
   initWeather(): void {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position: any) => {
           if (position) {
-            this.lat = position.coords.latitude;
-            this.lon = position.coords.longitude;
-            this.getWeather(this.city, this.lat, this.lon);
+            this.coordinates.lat = position.coords.latitude;
+            this.coordinates.lon = position.coords.longitude;
+            console.log(JSON.stringify(this.coordinates));
+            this.firstUse = false;
+            this.searchForWeatherCityDelay();
+            this.getWeatherByCoordinates(
+              this.coordinates.lat,
+              this.coordinates.lon
+            );
           }
         },
-        (error: any) => {
-          console.log(error);
-          this.city = constants.startupCity;
-          this.getWeather(this.city);
-        }
+        (error: any) => console.log(error)
       );
     } else {
       alert('Geolocation is not supported by this browser.');
-      this.city = constants.startupCity;
-      this.getWeather(this.city);
     }
   }
 
-  /* --- Get Weather functions */
-  getWeather(cityName: string, lat = -1, lon = -1) {
-    this.weatherService.getWeather(cityName, lat, lon).subscribe({
+  /* --- Get Weather functions ---- */
+  getWeather(cityName: string) {
+    if (this.city === cityName) return;
+    this.city = cityName;
+    this.weatherService.getWeather(cityName).subscribe({
       next: (res) => {
-        this.myWeather = res;
-        if (lat !== -1 && lon !== -1) {
-          this.city = this.myWeather.name;
-          this.inputText = this.city;
+        this.weatherData = res;
+        console.log(`getWeather: ${JSON.stringify(this.weatherData)}`);
+        this.getWeatherForecast(this.city, this.forecastDays);
+      },
+      error: (error) => {
+        if (this.showWeatherTimeout && !this.showWeather) {
+          clearTimeout(this.showWeatherTimeout);
+          this.showWeatherTimeout = undefined;
         }
-        console.log(`getWeather: ${this.myWeather}`);
-        this.myWeatherStringify = JSON.stringify(res);
+        console.log(error.message);
+      },
+    });
+  }
+
+  getWeatherByCoordinates(lat: number, lon: number): void {
+    this.weatherService.getWeatherByCoordinates(lat, lon).subscribe({
+      next: (res) => {
+        this.weatherData = res;
+        this.city = this.weatherData.name;
+        this.inputText = this.city;
+        console.log('getWeatherByCoordinates:');
+        console.log(this.weatherData);
+        this.getWeatherForecast(this.city, this.forecastDays);
       },
       error: (error) => console.log(error.message),
     });
   }
 
-  getWeatherForecast() {
-    this.weatherService.getWeatherForecast(this.city, 5).subscribe({
+  getWeatherForecast(cityName: string, numOfDays: number) {
+    this.forecastDays = numOfDays;
+    this.weatherService.getWeatherForecast(cityName, numOfDays).subscribe({
       next: (res) => {
-        this.myWeatherForecast = res;
-        console.log(`getWeatherForecast: ${this.myWeatherForecast}`);
-        this.myWeatherForecastStringify = JSON.stringify(res);
+        this.weatherForecastData = res;
+        console.log(`getWeatherForecast: `);
+        console.log(this.weatherForecastData);
       },
       error: (error) => console.log(error.message),
     });
+  }
+
+  /* --- Utils ---- */
+  private IsCoordinatesValid() {
+    return this.coordinates.lat !== -1 && this.coordinates.lon !== -1;
+  }
+
+  private searchForWeatherCityDelay() {
+    this.showWeather = false;
+    this.showWeatherTimeout = setTimeout(() => {
+      this.showWeather = true;
+      this.showWeatherTimeout = undefined;
+    }, 1000);
   }
 }
