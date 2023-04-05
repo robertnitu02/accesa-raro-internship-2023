@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherService } from '../services/weather.service';
 import { constants } from '../shared/constants/constants';
+import { WeatherModel } from '../shared/models/weather.model';
+import { WeatherForecastModel } from '../shared/models/weather-forecast.model';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +11,12 @@ import { constants } from '../shared/constants/constants';
 })
 export class AppComponent implements OnInit {
   title = 'weather-application';
-  city: string = 'Pucioasa';
-  myWeather: any;
+  city: string = constants.startupCity;
+  myWeather: WeatherModel | undefined = undefined;
+  myWeatherForecast: WeatherForecastModel | undefined = undefined;
+
   myWeatherStringify: any;
+  myWeatherForecastStringify: any;
 
   lat: number = -1;
   lon: number = -1;
@@ -19,76 +24,56 @@ export class AppComponent implements OnInit {
   constructor(private weatherService: WeatherService) {}
 
   ngOnInit() {
-    this.initWeatherByLocation();
+    this.initWeather();
   }
 
-  change(): void {
-    this.getForecastByDays();
-  }
-
-  initWeatherByLocation() {
+  /* --- Init Weather first Connect */
+  initWeather(): void {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position: any) => {
           if (position) {
-            // console.log(
-            //   `lat: ${position.coords.latitude} | lon: ${position.coords.longitude}`
-            // );
             this.lat = position.coords.latitude;
             this.lon = position.coords.longitude;
-            this.getWeatherByCoordinates();
-          } else {
-            this.city = constants.startupCity;
-            this.getWeatherByCityName(this.city);
+            this.getWeather(this.city, this.lat, this.lon);
           }
         },
         (error: any) => {
           console.log(error);
           this.city = constants.startupCity;
-          this.getWeatherByCityName(this.city);
+          this.getWeather(this.city);
         }
       );
     } else {
       alert('Geolocation is not supported by this browser.');
       this.city = constants.startupCity;
-      this.getWeatherByCityName(this.city);
+      this.getWeather(this.city);
     }
   }
 
-  getWeatherByCityName(cityName: string) {
-    this.weatherService.getWeatherByCityName(cityName).subscribe({
+  /* --- Get Weather functions */
+  getWeather(cityName: string, lat = -1, lon = -1) {
+    this.weatherService.getWeather(cityName, lat, lon).subscribe({
       next: (res) => {
         this.myWeather = res;
-        console.log(`getWeatherByCityName: ${this.myWeather}`);
+        if (lat !== -1 && lon !== -1) {
+          this.city = this.myWeather.name;
+        }
+        console.log(`getWeather: ${this.myWeather}`);
         this.myWeatherStringify = JSON.stringify(res);
       },
       error: (error) => console.log(error.message),
-      complete: () => console.log('API Call Completed'),
     });
   }
 
-  getWeatherByCoordinates() {
-    this.weatherService.getWeatherByCoordinates(this.lat, this.lon).subscribe({
+  getWeatherForecast() {
+    this.weatherService.getWeatherForecast(this.city, 5).subscribe({
       next: (res) => {
-        this.myWeather = res;
-        console.log(`getWeatherByCoordinates: ${this.myWeather}`);
-        this.myWeatherStringify = JSON.stringify(res);
+        this.myWeatherForecast = res;
+        console.log(`getWeatherForecast: ${this.myWeatherForecast}`);
+        this.myWeatherForecastStringify = JSON.stringify(res);
       },
       error: (error) => console.log(error.message),
-      complete: () => console.log('API Call Completed'),
-    });
-  }
-
-  getForecastByDays() {
-    this.weatherService.getForecastByDays(this.city, 5).subscribe({
-      next: (res) => {
-        this.myWeather = res;
-        console.log(`getForecastByDays: ${this.myWeather}`);
-        console.log(`days: ${JSON.stringify(this.myWeather.list[0])}`);
-        this.myWeatherStringify = JSON.stringify(res);
-      },
-      error: (error) => console.log(error.message),
-      complete: () => console.log('API Call Completed'),
     });
   }
 }

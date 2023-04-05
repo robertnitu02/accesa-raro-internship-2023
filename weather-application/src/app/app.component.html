@@ -1,4 +1,30 @@
 <input type="text" [(ngModel)]="city"/>
 {{ city }}
-<button (click)="change()">OpenWeatherMap ByDays</button>
+<br/><br/>
+<button (click)="getWeather(this.city)">Schimba</button>
+<br/><br/>
 {{ myWeatherStringify }}
+<br/><br/>
+<ul *ngIf="myWeather !== undefined">
+  <li>this.city: {{this.city}}</li>
+  <li>name: {{myWeather.name}}</li>
+  <li>Lat: {{myWeather.coord.lat}}</li>
+  <li>Lon: {{myWeather.coord.lon}}</li>
+  <li>Temp: {{myWeather.main.temp}}</li>
+  <li>Temp Maxima: {{myWeather.main.temp_max}}</li>
+  <li>Temp Minima: {{myWeather.main.temp_min}}</li>
+</ul>
+<br/><br/><br/><br/><br/>
+<button (click)="getWeatherForecast()">Arata prognoza pe 5 zile</button>
+<br/><br/>
+{{ myWeatherForecastStringify }}
+<br/><br/>
+<ul *ngIf="myWeatherForecast !== undefined">
+  <li>this.city: {{this.city}}</li>
+  <li>name: {{myWeatherForecast.city.name}}</li>
+  <li>Lat: {{myWeatherForecast.city.coord.lat}}</li>
+  <li>Lon: {{myWeatherForecast.city.coord.lon}}</li>
+  <li *ngFor="let forecast of myWeatherForecast.list">
+    {{ forecast.main.temp }}
+  </li>
+</ul>
