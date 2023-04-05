@@ -12,10 +12,7 @@
     <div class="weather">
       <ng-container *ngIf="currentViewState === viewStates.HOME">
         <div class="search">
-          <input type="text" placeholder="Insert a City name" value="{{this.city}}" [(ngModel)]="inputText">
-          <button (click)="getWeatherFromCity()">Search</button>
-          <input type="number" max="7" min="1" [(ngModel)]="inputNumber">
-          <button (click)="getForecast()">Forecast</button>
+
         </div>
         <ng-container *ngIf="this.showWeather">
           <app-weather-search [weatherModel]="this.weatherData" [forecastModel]="this.weatherForecastData"></app-weather-search>

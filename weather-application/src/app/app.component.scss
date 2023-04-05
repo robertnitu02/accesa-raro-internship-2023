@@ -14,7 +14,7 @@
       display: grid;
       grid-template-columns: 10% 10% 70% 5% 5%;
       @media only screen and (max-width: variables.$responsive-max-width) {
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: 22% 22% 12% 22% 22%;
       }
       width: 100%;
       height: 100%;
@@ -31,14 +31,14 @@
     place-items: center;
     .weather {
       display: grid;
-      grid-template-rows: 10% auto;
-      @include mat.elevation(2);
       width: variables.$big-screen-content-width;
       height: variables.$big-screen-content-height;
       @media only screen and (max-width: variables.$responsive-max-width) {
         width: variables.$low-screen-content-width;
         height: variables.$low-screen-content-height;
       }
+      grid-template-rows: 10% auto;
+      @include mat.elevation(2);
       background-color: rgba(255, 255, 255, 0.85);
       border-radius: 2%;
 
@@ -46,11 +46,7 @@
         display: grid;
         align-content: center;
         place-items: center;
-
-        input {
-          width: 150px;
-          height: 50px;
-        }
+        background-color: red;
       }
     }
   }
@@ -58,6 +54,9 @@
   .footer {
     display: grid;
     place-items: center;
+    width: 100%;
+    height: 100%;
+    text-align: center;
 
     .info {
       color: variables.$white;

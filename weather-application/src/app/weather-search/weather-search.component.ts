@@ -11,8 +11,6 @@ export class WeatherSearchComponent implements OnInit {
   @Input() weatherModel: WeatherModel | undefined = undefined;
   @Input() forecastModel: WeatherForecastModel | undefined = undefined;
 
-  stringy: string = '';
-
   constructor() {}
 
   ngOnInit(): void {
@@ -20,6 +18,5 @@ export class WeatherSearchComponent implements OnInit {
     console.log(this.weatherModel);
     console.log(`forecastModel:`);
     console.log(this.forecastModel);
-    this.stringy = JSON.stringify(this.forecastModel);
   }
 }
