@@ -25,6 +25,7 @@ export class AppComponent implements OnInit {
   weatherData: WeatherModel | undefined = undefined;
 
   city: string = '';
+  cityFound = true;
   showWeather = false;
   firstUse = true;
   showWeatherTimeout: any | undefined = undefined;
@@ -84,6 +85,7 @@ export class AppComponent implements OnInit {
     this.weatherService.getWeather(cityName).subscribe({
       next: (res) => {
         this.weatherData = res;
+        this.cityFound = true;
         console.log(`getWeather: ${JSON.stringify(this.weatherData)}`);
       },
       error: (error) => {
@@ -91,6 +93,7 @@ export class AppComponent implements OnInit {
           clearTimeout(this.showWeatherTimeout);
           this.showWeatherTimeout = undefined;
         }
+        this.cityFound = false;
         console.log(error.message);
       },
     });

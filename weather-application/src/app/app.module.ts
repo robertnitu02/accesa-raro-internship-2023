@@ -9,9 +9,10 @@ import { WeatherSearchComponent } from './weather-search/weather-search.componen
 import { LoadingComponent } from './loading/loading.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSliderModule } from '@angular/material/slider';
+import { CityNotFoundComponent } from './city-not-found/city-not-found.component';
 
 @NgModule({
-  declarations: [AppComponent, WeatherSearchComponent, LoadingComponent],
+  declarations: [AppComponent, WeatherSearchComponent, LoadingComponent, CityNotFoundComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
