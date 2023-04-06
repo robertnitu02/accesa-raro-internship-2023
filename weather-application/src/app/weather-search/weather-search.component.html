@@ -1,41 +1,66 @@
-<div class="weather-search">
-  <div class="general-information">
-    <div></div>
-    <div class="general-info">
-      <span class="day">{{date | date: 'EEEE'}}</span>
-      <span class="date">{{date | date: 'mediumDate'}}</span>
-      <div class="location">
-        <span>IMG</span>
-        <span>{{weatherModel!.name}}, {{weatherModel!.sys.country}}</span>
-        <span></span>
-      </div>
-    </div>
-    <div></div>
-    <div class="image">
-      {{weatherModel!.weather[0].icon}}
-    </div>
-    <div class="weather">
-      {{weatherModel!.main.temp}}
-    </div>
-    <div class="detail">
-      {{weatherModel!.weather[0].description}}
-    </div>
-    <div></div>
-  </div>
-  <div class="more-information">
-    <div class="rain-information">
+<ng-container *ngIf="weatherModel && forecastModel">
+  <div class="weather-search">
+    <div class="general-information">
       <div></div>
-      <div class="information">
-        <span class="precipitation">Precipitation</span>
-        <span class="humidity">Humidity</span>
-        <span class="wind">Wind</span>
-        <span class="precipitation-value">?%</span>
-        <span class="humidity-value">{{weatherModel!.main.humidity}}%</span>
-        <span class="wind-value">{{weatherModel!.wind.speed}} km/h</span>
+      <div class="general-info">
+        <span class="day">{{date | date: 'EEEE'}}</span>
+        <span class="date">{{date | date: 'mediumDate'}}</span>
+        <div class="location">
+          <span>IMG</span>
+          <span>{{weatherModel!.name}}, {{weatherModel!.sys.country}}</span>
+          <span></span>
+        </div>
+      </div>
+      <div></div>
+      <div class="image">
+        {{weatherModel!.weather[0].icon}}
+      </div>
+      <div class="weather">
+        {{weatherModel!.main.temp}}
+      </div>
+      <div class="detail">
+        {{weatherModel!.weather[0].description}}
       </div>
       <div></div>
     </div>
-    <div class="forecast-information"></div>
-    <div class="forecast-select-days"></div>
+    <div class="more-information">
+      <div class="rain-information">
+        <div></div>
+        <div class="information">
+          <span class="precipitation title-text">Precipitation</span>
+          <span class="humidity title-text">Humidity</span>
+          <span class="wind title-text">Wind</span>
+          <span class="precipitation-value right-text">?%</span>
+          <span class="humidity-value right-text">{{weatherModel.main.humidity}}%</span>
+          <span class="wind-value right-text">{{weatherModel.wind.speed}}km/h</span>
+        </div>
+        <div></div>
+      </div>
+      <div class="forecast-information">
+        <div *ngFor="let forecast of forecastModel.list" class="forecast">
+          <span>{{forecast.weather[0].icon}}</span>
+          <span>Tue</span>
+          <span>{{forecast.main.temp}}</span>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="title">
+          Show Forecast for {{ this.numOfDays }} Days
+        </div>
+        <div class="set-forecast">
+          <mat-slider [thumbLabel]="false"
+                      [value]="this.numOfDays" (input)="onSliderChange($event)"
+                      step="1" min="1" max="7" aria-label="units"></mat-slider>
+        </div>
+        <div class="set-favorite">
+          <span class="title">You like this city?</span>
+          <span class="sub-title">Press ❤️ to save!</span>
+        </div>
+      </div>
+      <div></div>
+    </div>
   </div>
-</div>
+</ng-container>
+<ng-container *ngIf="!forecastModel && !forecastModel">
+  <app-loading></app-loading>
+</ng-container>

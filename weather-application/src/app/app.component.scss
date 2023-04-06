@@ -23,6 +23,11 @@
       span {
         color: variables.$white;
       }
+
+      .clickable:hover {
+        color: variables.$grey;
+        cursor: pointer;
+      }
     }
 
     .interact {

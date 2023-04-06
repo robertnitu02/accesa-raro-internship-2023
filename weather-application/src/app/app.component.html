@@ -1,16 +1,16 @@
 <div class="app">
   <div class="nav-bar night__navbar">
     <div class="buttons">
-      <span>Weather</span>
-      <span>Favorites</span>
+      <span class="clickable">Weather</span>
+      <span class="clickable">Favorites</span>
       <span></span>
       <div class="interact">
         <span>Language:</span>
-        <span>RO/EN</span>
+        <span class="clickable">RO/EN</span>
       </div>
       <div class="interact">
         <span>Theme:</span>
-        <span>Sunny</span>
+        <span class="clickable">Default</span>
       </div>
     </div>
   </div>
@@ -22,7 +22,7 @@
           <button class="button" (click)="sendWeatherData()">Show Weather</button>
         </div>
         <ng-container *ngIf="this.showWeather">
-          <app-weather-search [weatherModel]="this.weatherData" [forecastModel]="this.weatherForecastData"></app-weather-search>
+          <app-weather-search [weatherModel]="this.weatherData" [cityName]="this.city"></app-weather-search>
         </ng-container>
         <ng-container *ngIf="!this.showWeather">
           <app-loading></app-loading>

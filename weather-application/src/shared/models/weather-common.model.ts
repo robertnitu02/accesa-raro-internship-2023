@@ -44,7 +44,7 @@ export interface sys {
 export interface list {
   dt: number;
   main: main;
-  weather: weather;
+  weather: weather[];
   clouds: clouds;
   wind: wind;
   visibility: number;
