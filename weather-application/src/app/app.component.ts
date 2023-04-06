@@ -4,6 +4,7 @@ import { constants } from '../shared/constants/constants';
 import { WeatherModel } from '../shared/models/weather.model';
 import { WeatherForecastModel } from '../shared/models/weather-forecast.model';
 import { coordinates } from '../shared/models/weather-common.model';
+import { environment } from '../environments/environment';
 
 export enum ViewState {
   HOME,
@@ -67,15 +68,21 @@ export class AppComponent implements OnInit {
             this.coordinates.lat = position.coords.latitude;
             this.coordinates.lon = position.coords.longitude;
             console.log(JSON.stringify(this.coordinates));
-            this.firstUse = false;
-            this.searchForWeatherCityDelay();
             this.getWeatherByCoordinates(
               this.coordinates.lat,
               this.coordinates.lon
             );
+            this.firstUse = false;
+            this.searchForWeatherCityDelay();
           }
         },
-        (error: any) => console.log(error)
+        (error: any) => {
+          console.log(error);
+          this.getWeather(constants.startupCity);
+          this.inputText = constants.startupCity;
+          this.firstUse = false;
+          this.searchForWeatherCityDelay();
+        }
       );
     } else {
       alert('Geolocation is not supported by this browser.');

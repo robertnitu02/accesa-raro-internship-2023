@@ -4,8 +4,14 @@
       <span>Weather</span>
       <span>Favorites</span>
       <span></span>
-      <span>RO/EN</span>
-      <span>Themes</span>
+      <div class="interact">
+        <span>Language:</span>
+        <span>RO/EN</span>
+      </div>
+      <div class="interact">
+        <span>Theme:</span>
+        <span>Sunny</span>
+      </div>
     </div>
   </div>
   <div class="content night__content">
@@ -13,10 +19,13 @@
       <ng-container *ngIf="currentViewState === viewStates.HOME">
         <div class="search">
           <input class="input" type="text" placeholder="Insert City Name" [(ngModel)]="inputText">
-          <button (click)="sendWeatherData()">Show Weather</button>
+          <button class="button" (click)="sendWeatherData()">Show Weather</button>
         </div>
         <ng-container *ngIf="this.showWeather">
           <app-weather-search [weatherModel]="this.weatherData" [forecastModel]="this.weatherForecastData"></app-weather-search>
+        </ng-container>
+        <ng-container *ngIf="!this.showWeather">
+          <app-loading></app-loading>
         </ng-container>
       </ng-container>
     </div>
