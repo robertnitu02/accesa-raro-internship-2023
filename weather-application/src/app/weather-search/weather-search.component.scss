@@ -25,7 +25,23 @@
       grid-template-rows: repeat(3, 1fr);
 
       .day {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         color: black;
+
+        .image {
+          margin-right: 0.5rem;
+          text-align: right;
+
+          img {
+            width: 25px;
+            height: 25px;
+          }
+
+          img:hover {
+            cursor: pointer;
+          }
+        }
       }
 
       .date {

@@ -10,9 +10,17 @@ import { LoadingComponent } from './loading/loading.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSliderModule } from '@angular/material/slider';
 import { CityNotFoundComponent } from './city-not-found/city-not-found.component';
+import { NgOptimizedImage } from '@angular/common';
+import { EnterCityComponent } from './enter-city/enter-city.component';
 
 @NgModule({
-  declarations: [AppComponent, WeatherSearchComponent, LoadingComponent, CityNotFoundComponent],
+  declarations: [
+    AppComponent,
+    WeatherSearchComponent,
+    LoadingComponent,
+    CityNotFoundComponent,
+    EnterCityComponent,
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -20,6 +28,7 @@ import { CityNotFoundComponent } from './city-not-found/city-not-found.component
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
     MatSliderModule,
+    NgOptimizedImage,
   ],
   providers: [],
   bootstrap: [AppComponent],

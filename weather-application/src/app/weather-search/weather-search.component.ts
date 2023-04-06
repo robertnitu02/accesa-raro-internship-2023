@@ -4,6 +4,10 @@ import { WeatherForecastModel } from '../../shared/models/weather-forecast.model
 import { WeatherService } from '../../services/weather.service';
 import { MatSliderChange } from '@angular/material/slider';
 
+interface Dictionary<T> {
+  [key: string]: T;
+}
+
 @Component({
   selector: 'app-weather-search',
   templateUrl: './weather-search.component.html',
@@ -18,6 +22,12 @@ export class WeatherSearchComponent implements OnInit {
   forecastModel: WeatherForecastModel | undefined = undefined;
   numOfDays = 4;
 
+  favoritesCity: Dictionary<WeatherModel> = {};
+  favoriteIconsPath: string[] = [
+    './../assets/images/favorite.png',
+    './../assets/images/no-favorite.png',
+  ];
+
   constructor(private weatherService: WeatherService) {}
 
   ngOnInit(): void {
@@ -30,6 +40,10 @@ export class WeatherSearchComponent implements OnInit {
       // console.log(this.date);
       this.date = new Date().toLocaleString();
     }, 1000);
+
+    const data = localStorage.getItem('FavoriteData');
+    if (data !== null) this.favoritesCity = JSON.parse(data);
+    console.log('>>>' + JSON.stringify(this.favoritesCity));
   }
 
   getWeatherForecast(cityName: string, numOfDays: number) {
@@ -47,5 +61,22 @@ export class WeatherSearchComponent implements OnInit {
     this.numOfDays = $event.value as number;
     this.getWeatherForecast(this.cityName, this.numOfDays);
     console.log($event.value);
+  }
+
+  addToFavorite() {
+    console.log('enter');
+    if (this.favoritesCity[this.cityName]) {
+      console.log('deleted');
+      delete this.favoritesCity[this.cityName];
+    } else {
+      if (this.weatherModel) {
+        console.log('added ' + this.cityName);
+        this.favoritesCity[
+          this.cityName.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        ] = this.weatherModel;
+      }
+    }
+    localStorage.setItem('FavoriteData', JSON.stringify(this.favoritesCity));
+    console.log(JSON.stringify(this.favoritesCity));
   }
 }

@@ -65,13 +65,7 @@ export class AppComponent implements OnInit {
             this.searchForWeatherCityDelay();
           }
         },
-        (error: any) => {
-          console.log(error);
-          this.getWeather(constants.startupCity);
-          this.inputText = constants.startupCity;
-          this.firstUse = false;
-          this.searchForWeatherCityDelay();
-        }
+        (error: any) => console.log(error)
       );
     } else {
       alert('Geolocation is not supported by this browser.');

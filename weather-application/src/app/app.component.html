@@ -21,13 +21,16 @@
           <input class="input" type="text" placeholder="Insert City Name" [(ngModel)]="inputText">
           <button class="button" (click)="sendWeatherData()">Show Weather</button>
         </div>
+        <ng-container *ngIf="this.firstUse && this.city === ''">
+          <app-enter-city></app-enter-city>
+        </ng-container>
         <ng-container *ngIf="!this.cityFound">
           <app-city-not-found></app-city-not-found>
         </ng-container>
         <ng-container *ngIf="this.cityFound && this.showWeather">
           <app-weather-search [weatherModel]="this.weatherData" [cityName]="this.city"></app-weather-search>
         </ng-container>
-        <ng-container *ngIf="this.cityFound && !this.showWeather">
+        <ng-container *ngIf="this.cityFound && !this.showWeather && this.city !== ''">
           <app-loading></app-loading>
         </ng-container>
       </ng-container>

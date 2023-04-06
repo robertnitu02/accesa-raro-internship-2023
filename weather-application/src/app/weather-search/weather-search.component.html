@@ -3,23 +3,30 @@
     <div class="general-information">
       <div></div>
       <div class="general-info">
-        <span class="day">{{date | date: 'EEEE'}}</span>
-        <span class="date">{{date | date: 'mediumDate'}}</span>
+        <div class="day">
+          <span>{{date | date: 'EEEE'}}</span>
+          <span class="image">
+            <img src="{{this.favoritesCity[this.cityName] ? favoriteIconsPath[0] : favoriteIconsPath[1]}}" alt="Favorite" (click)="addToFavorite()">
+          </span>
+        </div>
+        <div class="date">
+          {{date | date: 'mediumDate'}}
+        </div>
         <div class="location">
           <span>IMG</span>
-          <span>{{weatherModel!.name}}, {{weatherModel!.sys.country}}</span>
+          <span>{{weatherModel.name}}, {{weatherModel.sys.country}}</span>
           <span></span>
         </div>
       </div>
       <div></div>
       <div class="image">
-        {{weatherModel!.weather[0].icon}}
+        {{weatherModel.weather[0].icon}}
       </div>
       <div class="weather">
-        {{weatherModel!.main.temp}}
+        {{weatherModel.main.temp}}
       </div>
       <div class="detail">
-        {{weatherModel!.weather[0].description}}
+        {{weatherModel.weather[0].description}}
       </div>
       <div></div>
     </div>
