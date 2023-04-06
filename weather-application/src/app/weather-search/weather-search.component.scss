@@ -8,10 +8,32 @@
 
   .general-information {
     display: grid;
+    width: 100%;
+    height: 100%;
+    padding: 0.5rem;
+    grid-template-rows: 5% 25% 15% 15% 25% 10% 5%;
     background-color: blue;
     border: {
       bottom-left-radius: 2%;
     };
+
+    .general-info {
+      display: grid;
+      grid-template-rows: repeat(3, 1fr);
+
+      .day {
+        color: black;
+      }
+
+      .date {
+        color: black;
+      }
+
+      .location {
+        display: grid;
+        grid-template-columns: 10% 50% auto;
+      }
+    }
   }
 
   .more-information {
@@ -24,7 +46,53 @@
 
     .rain-information {
       display: grid;
+      width: 100%;
+      height: 100%;
+      padding: 1rem;
+      grid-template-rows: 10% 80% 10%;
       background-color: rgba(104, 51, 161, 0.2);
+
+      .information {
+        display: grid;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-columns: 60% 10% 30%;
+
+        .precipitation {
+          display: grid;
+          grid-row: 1;
+          grid-column: 1;
+        }
+
+        .humidity {
+          display: grid;
+          grid-row: 2;
+          grid-column: 1;
+        }
+
+        .wind {
+          display: grid;
+          grid-row: 3;
+          grid-column: 1;
+        }
+
+        .precipitation-value {
+          display: grid;
+          grid-row: 1;
+          grid-column: 3;
+        }
+
+        .humidity-value {
+          display: grid;
+          grid-row: 2;
+          grid-column: 3;
+        }
+
+        .wind-value {
+          display: grid;
+          grid-row: 3;
+          grid-column: 3;
+        }
+      }
     }
 
     .forecast-information {

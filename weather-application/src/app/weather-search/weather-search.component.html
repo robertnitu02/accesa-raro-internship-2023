@@ -1,9 +1,40 @@
 <div class="weather-search">
   <div class="general-information">
-
+    <div></div>
+    <div class="general-info">
+      <span class="day">{{date | date: 'EEEE'}}</span>
+      <span class="date">{{date | date: 'mediumDate'}}</span>
+      <div class="location">
+        <span>IMG</span>
+        <span>{{weatherModel!.name}}, {{weatherModel!.sys.country}}</span>
+        <span></span>
+      </div>
+    </div>
+    <div></div>
+    <div class="image">
+      {{weatherModel!.weather[0].icon}}
+    </div>
+    <div class="weather">
+      {{weatherModel!.main.temp}}
+    </div>
+    <div class="detail">
+      {{weatherModel!.weather[0].description}}
+    </div>
+    <div></div>
   </div>
   <div class="more-information">
-    <div class="rain-information"></div>
+    <div class="rain-information">
+      <div></div>
+      <div class="information">
+        <span class="precipitation">Precipitation</span>
+        <span class="humidity">Humidity</span>
+        <span class="wind">Wind</span>
+        <span class="precipitation-value">?%</span>
+        <span class="humidity-value">{{weatherModel!.main.humidity}}%</span>
+        <span class="wind-value">{{weatherModel!.wind.speed}} km/h</span>
+      </div>
+      <div></div>
+    </div>
     <div class="forecast-information"></div>
     <div class="forecast-select-days"></div>
   </div>

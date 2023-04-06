@@ -9,7 +9,7 @@ import {
 
 export interface WeatherModel {
   coord: coordinates;
-  weather: weather;
+  weather: weather[];
   base: string;
   main: main;
   visibility: number;
