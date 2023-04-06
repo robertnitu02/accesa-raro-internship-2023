@@ -42,12 +42,13 @@ export class AppComponent implements OnInit {
     this.initWeather();
   }
 
-  getWeatherFromCity(): void {
+  sendWeatherData() {
     if (!this.firstUse && this.city === this.inputText) return;
     if (this.showWeatherTimeout) return;
     if (this.firstUse) this.firstUse = false;
 
     this.searchForWeatherCityDelay();
+    console.log(this.inputText);
     this.getWeather(this.inputText);
   }
 

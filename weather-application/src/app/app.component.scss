@@ -37,16 +37,29 @@
         width: variables.$low-screen-content-width;
         height: variables.$low-screen-content-height;
       }
-      grid-template-rows: 10% auto;
+      grid-template-rows: 15% auto;
       @include mat.elevation(2);
-      background-color: rgba(255, 255, 255, 0.85);
+      //background-color: rgba(255, 255, 255, 0.85);
       border-radius: 2%;
 
       .search {
         display: grid;
+        grid-template-rows: 50% 50%;
+        grid-row-gap: 0.5rem;
         align-content: center;
         place-items: center;
-        background-color: red;
+
+        .input {
+          display: block;
+          border: 0;
+          width: 50%;
+          padding: 8px 16px;
+          line-height: 25px;
+          font-size: 14px;
+          font-weight: 500;
+          font-family: inherit;
+          border-radius: 6px;
+        }
       }
     }
   }
