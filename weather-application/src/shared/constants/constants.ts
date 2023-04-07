@@ -8,3 +8,9 @@ export const APIConstants = {
   weatherApiMapKey: '4125f96f555001d37b2403eb49770cc4',
   units: 'metric',
 };
+
+export const LocalStorageKeys = {
+  language: 'Language',
+  theme: 'Theme',
+  favorites: 'FavoriteData',
+};

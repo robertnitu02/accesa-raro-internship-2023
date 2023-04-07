@@ -4,6 +4,8 @@ import { WeatherForecastModel } from '../../shared/models/weather-forecast.model
 import { WeatherService } from '../../services/weather.service';
 import { MatSliderChange } from '@angular/material/slider';
 import { Dictionary } from 'src/shared/models/dictionary';
+import { WeatherConditions } from '../../shared/constants/weather-conditions';
+import { LocalStorageKeys } from '../../shared/constants/constants';
 
 @Component({
   selector: 'app-weather-search',
@@ -15,6 +17,7 @@ export class WeatherSearchComponent implements OnInit {
   @Input() cityName: string = '';
 
   date: string = new Date().toLocaleString();
+  theme = 'rain';
 
   forecastModel: WeatherForecastModel | undefined = undefined;
   numOfDays = 4;
@@ -28,21 +31,18 @@ export class WeatherSearchComponent implements OnInit {
   constructor(private weatherService: WeatherService) {}
 
   ngOnInit(): void {
-    console.log(`cityName:`);
-    console.log(this.cityName);
-    console.log(`weatherModel:`);
-    console.log(this.weatherModel);
+    // console.log(`cityName:`);
+    // console.log(this.cityName);
+    // console.log(`weatherModel:`);
+    // console.log(this.weatherModel);
+
     this.getWeatherForecast(this.cityName, this.numOfDays);
     setInterval(() => {
       // console.log(this.date);
       this.date = new Date().toLocaleString();
     }, 1000);
 
-    const data = localStorage.getItem('FavoriteData');
-    if (data !== null) this.favoritesCity = JSON.parse(data);
-    console.log(
-      'WeatherSearchComponent >>>' + JSON.stringify(this.favoritesCity)
-    );
+    this.initDataFromLocalStorage();
   }
 
   getWeatherForecast(cityName: string, numOfDays: number) {
@@ -56,12 +56,6 @@ export class WeatherSearchComponent implements OnInit {
     });
   }
 
-  onSliderChange($event: MatSliderChange) {
-    this.numOfDays = $event.value as number;
-    this.getWeatherForecast(this.cityName, this.numOfDays);
-    console.log($event.value);
-  }
-
   addToFavorite() {
     console.log('enter');
     if (this.favoritesCity[this.cityName]) {
@@ -73,11 +67,37 @@ export class WeatherSearchComponent implements OnInit {
         this.favoritesCity[this.cityName] = this.weatherModel;
       }
     }
-    localStorage.setItem('FavoriteData', JSON.stringify(this.favoritesCity));
+    localStorage.setItem(
+      LocalStorageKeys.favorites,
+      JSON.stringify(this.favoritesCity)
+    );
     console.log(JSON.stringify(this.favoritesCity));
+  }
+
+  /* --- UTILS --- */
+  private initDataFromLocalStorage() {
+    const favoritesData = localStorage.getItem(LocalStorageKeys.favorites);
+    if (favoritesData !== null) this.favoritesCity = JSON.parse(favoritesData);
+    console.log(
+      'WeatherSearchComponent >>>' + JSON.stringify(this.favoritesCity)
+    );
+
+    const themeData = localStorage.getItem(LocalStorageKeys.theme);
+    if (themeData) {
+      this.theme = themeData;
+    } else {
+      this.theme = 'rain';
+      localStorage.setItem(LocalStorageKeys.favorites, this.theme);
+    }
   }
 
   beautifyTemp(temp: number) {
     return Math.floor(temp);
+  }
+
+  onSliderChange($event: MatSliderChange) {
+    this.numOfDays = $event.value as number;
+    this.getWeatherForecast(this.cityName, this.numOfDays);
+    console.log($event.value);
   }
 }

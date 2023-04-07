@@ -12,7 +12,7 @@
   .nav-bar {
     .buttons {
       display: grid;
-      grid-template-columns: 8% 8% 68% 8% 8%;
+      grid-template-columns: 8% 8% 79% 5%;
       @media only screen and (max-width: variables.$responsive-max-width) {
         grid-template-columns: 22% 22% 12% 22% 22%;
       }
@@ -41,7 +41,6 @@
 
     .interact {
       display: grid;
-      grid-template-rows: 50% 50%;
       align-items: center;
       text-align: center;
     }
@@ -61,7 +60,6 @@
       }
       grid-template-rows: 15% auto;
       @include mat.elevation(2);
-      //background-color: rgba(255, 255, 255, 0.85);
       border-radius: 2%;
 
       .search {
@@ -117,13 +115,17 @@
     }
   }
 
-  .night {
+  .rain {
     &__navbar {
-      background: linear-gradient(178.1deg, rgb(60, 55, 106) 8.5%, rgb(23, 20, 69) 82.4%);
+      @include variables.rain-navbar;
     }
 
     &__content {
-      background: linear-gradient(112.1deg, rgb(32, 38, 57) 11.4%, rgb(63, 76, 119) 70.2%);
+      @include variables.rain-content();
+    }
+
+    &__footer {
+      @include variables.rain-content();
     }
   }
 }

@@ -1,20 +1,17 @@
 <div class="app">
-  <div class="nav-bar night__navbar">
+  <div class="nav-bar {{this.theme}}__navbar">
     <div class="buttons">
       <span class="clickable {{currentViewState === viewStates.HOME ? 'active' : ''}}" (click)="currentViewState = viewStates.HOME">Weather</span>
       <span class="clickable {{currentViewState === viewStates.FAVORITES ? 'active' : ''}}" (click)="currentViewState = viewStates.FAVORITES">Favorites</span>
       <span></span>
       <div class="interact">
-        <span>Language:</span>
-        <span class="clickable">RO/EN</span>
-      </div>
-      <div class="interact">
-        <span>Theme:</span>
-        <span class="clickable">Default</span>
+        <span class="clickable">
+          <img src="./assets/images/{{language}}.png" alt="language" (click)="changeLanguage()" width="35px" height="35px"/>
+        </span>
       </div>
     </div>
   </div>
-  <div class="content night__content">
+  <div class="content {{this.theme}}__content">
     <ng-container *ngIf="currentViewState === viewStates.HOME">
       <div class="weather">
         <div class="search">
@@ -39,7 +36,7 @@
       <app-favorites></app-favorites>
     </ng-container>
   </div>
-  <div class="footer night__content">
+  <div class="footer {{this.theme}}__footer">
     <span class="info">Nițu Robert - Accesa & RaRo Summer Internship 2023 | <a
       href="https://github.com/robertnitu02/accesa-raro-internship-2023" target="_blank">GitHub</a></span>
   </div>

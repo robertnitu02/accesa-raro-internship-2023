@@ -1,4 +1,4 @@
-<div class="favorites">
+<div class="favorites {{this.theme}}__content">
   <div class="info">
     <span class="title">Your favorite's list</span>
     <span
@@ -10,7 +10,7 @@
         <div class="city">
           <img src="https://openweathermap.org/img/wn/{{city.value.weather[0].icon}}@2x.png" alt="icon"/>
           <span class="temperature">{{beautifyTemp(city.value.main.temp)}} °C</span>
-          <span class="city-name" (click)="removeCity(city.key)">{{city.key}}</span>
+          <span class="city-name" (click)="removeCity(city.key)">{{city.value.name}}</span>
         </div>
       </div>
     </ng-container>

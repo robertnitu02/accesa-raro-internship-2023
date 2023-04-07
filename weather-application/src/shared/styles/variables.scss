@@ -17,3 +17,25 @@ $big-screen-content-width: 750px;
 $big-screen-content-height: 650px;
 $low-screen-content-width: 350px;
 $low-screen-content-height: 550px;
+
+/* Mixin */
+@mixin rain-navbar {
+  background: linear-gradient(112.1deg, rgb(32, 38, 57) 11.4%, rgb(63, 76, 119) 70.2%);
+}
+
+@mixin rain-content {
+  background: linear-gradient(112.1deg, rgb(32, 38, 57) 11.4%, rgb(63, 76, 119) 70.2%);
+}
+
+@mixin rain-weather-content {
+  background: linear-gradient(to top, #09203f 0%, #537895 100%);
+}
+
+@mixin rain-weather-content-image {
+  background-image: url("https://i.imgur.com/rU2r6X1.jpg");
+}
+
+@mixin rain-favorites-content {
+  background: linear-gradient(to top, #09203f 0%, #537895 100%);
+  border-radius: 2%;
+}

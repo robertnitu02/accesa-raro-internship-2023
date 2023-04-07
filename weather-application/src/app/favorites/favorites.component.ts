@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Dictionary } from 'src/shared/models/dictionary';
 import { WeatherModel } from '../../shared/models/weather.model';
+import { LocalStorageKeys } from '../../shared/constants/constants';
 
 @Component({
   selector: 'app-favorites',
@@ -11,12 +12,12 @@ export class FavoritesComponent implements OnInit {
   favoritesCity: Dictionary<WeatherModel> = {};
   favoritesCityList: { value: WeatherModel; key: string }[] = [];
 
+  theme = 'thunderstorm';
+
   constructor() {}
 
   ngOnInit(): void {
-    const data = localStorage.getItem('FavoriteData');
-    if (data !== null) this.favoritesCity = JSON.parse(data);
-    console.log('FavoritesComponent >>>' + JSON.stringify(this.favoritesCity));
+    this.initDataFromLocalStorage();
 
     if (this.favoritesCity) {
       this.favoritesCityList = Object.keys(this.favoritesCity).map((key) => {
@@ -28,11 +29,28 @@ export class FavoritesComponent implements OnInit {
 
   removeCity(city: string) {
     delete this.favoritesCity[city];
-    localStorage.setItem('FavoriteData', JSON.stringify(this.favoritesCity));
+    localStorage.setItem(
+      LocalStorageKeys.favorites,
+      JSON.stringify(this.favoritesCity)
+    );
     console.log(JSON.stringify(this.favoritesCity));
     this.favoritesCityList = Object.keys(this.favoritesCity).map((key) => {
       return { key: key, value: this.favoritesCity[key] };
     });
+  }
+
+  /* --- UTILS --- */
+  private initDataFromLocalStorage() {
+    const data = localStorage.getItem(LocalStorageKeys.favorites);
+    if (data !== null) this.favoritesCity = JSON.parse(data);
+
+    const themeData = localStorage.getItem(LocalStorageKeys.theme);
+    if (themeData) {
+      this.theme = themeData;
+    } else {
+      this.theme = 'rain';
+      localStorage.setItem(LocalStorageKeys.favorites, this.theme);
+    }
   }
 
   beautifyTemp(temp: number) {

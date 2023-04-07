@@ -4,7 +4,6 @@
 .favorites {
   display: grid;
   padding: 2rem;
-  background: linear-gradient(to top, #09203f 0%, #537895 100%);
   width: variables.$big-screen-content-width;
   height: variables.$big-screen-content-height;
   @media only screen and (max-width: variables.$responsive-max-width) {
@@ -13,7 +12,6 @@
   }
   grid-template-rows: 15% auto;
   @include mat.elevation(2);
-  border-radius: 2%;
 
   .info {
     display: grid;
@@ -42,8 +40,7 @@
       width: 220px;
       height: 165px;
       border: 1px solid black;
-      border-radius: 2%;
-      //background-color: blue;
+      border-radius: 1%;
       @include mat.elevation(2);
 
       .city {
@@ -73,5 +70,11 @@
         cursor: pointer;
       }
     }
+  }
+}
+
+.rain {
+  &__content {
+    @include variables.rain-favorites-content;
   }
 }

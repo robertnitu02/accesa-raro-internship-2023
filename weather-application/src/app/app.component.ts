@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherService } from '../services/weather.service';
-import { constants } from '../shared/constants/constants';
+import { constants, LocalStorageKeys } from '../shared/constants/constants';
 import { WeatherModel } from '../shared/models/weather.model';
 import { coordinates } from '../shared/models/weather-common.model';
 export enum ViewState {
@@ -16,13 +16,15 @@ export enum ViewState {
 export class AppComponent implements OnInit {
   viewStates = ViewState;
 
-  currentViewState = this.viewStates.FAVORITES;
+  currentViewState = this.viewStates.HOME;
   coordinates: coordinates = {
     lat: -1,
     lon: -1,
   };
 
   weatherData: WeatherModel | undefined = undefined;
+  language = 'ro';
+  theme = 'rain';
 
   city: string = '';
   cityFound = true;
@@ -35,6 +37,7 @@ export class AppComponent implements OnInit {
   constructor(private weatherService: WeatherService) {}
 
   ngOnInit() {
+    this.initDataFromLocalStorage();
     this.initWeather();
   }
 
@@ -73,9 +76,11 @@ export class AppComponent implements OnInit {
   }
 
   /* --- Get Weather functions ---- */
-  getWeather(cityName: string) {
-    if (this.city === cityName) return;
-    this.city = cityName;
+  getWeather(cityName: string, updateLanguage = false) {
+    if (!updateLanguage) {
+      if (this.city === cityName) return;
+      this.city = cityName;
+    }
     this.weatherService.getWeather(cityName).subscribe({
       next: (res) => {
         this.weatherData = res;
@@ -107,11 +112,36 @@ export class AppComponent implements OnInit {
   }
 
   /* --- Utils ---- */
+  private initDataFromLocalStorage() {
+    const langData = localStorage.getItem(LocalStorageKeys.language);
+    if (langData) {
+      this.language = langData;
+    } else {
+      this.language = 'ro';
+      localStorage.setItem(LocalStorageKeys.language, this.language);
+    }
+
+    const themeData = localStorage.getItem(LocalStorageKeys.theme);
+    if (themeData) {
+      this.theme = themeData;
+    } else {
+      this.theme = 'rain';
+      localStorage.setItem(LocalStorageKeys.theme, this.theme);
+    }
+  }
+
   private searchForWeatherCityDelay() {
     this.showWeather = false;
     this.showWeatherTimeout = setTimeout(() => {
       this.showWeather = true;
       this.showWeatherTimeout = undefined;
     }, 1000);
+  }
+
+  changeLanguage() {
+    this.language =
+      this.language === 'ro' ? (this.language = 'en') : (this.language = 'ro');
+    localStorage.setItem(LocalStorageKeys.language, this.language);
+    this.getWeather(this.city, true);
   }
 }

@@ -1,6 +1,6 @@
 <ng-container *ngIf="weatherModel && forecastModel">
   <div class="weather-search">
-    <div class="general-information">
+    <div class="general-information {{this.theme}}__background-image">
       <div></div>
       <div class="general-info">
         <div class="day">
@@ -29,7 +29,7 @@
         </div>
       </div>
     </div>
-    <div class="more-information">
+    <div class="more-information {{this.theme}}__weather-content">
       <div class="rain-information">
         <div></div>
         <div class="information">
