@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
 
   weatherData: WeatherModel | undefined = undefined;
   language = 'ro';
-  theme = 'rain';
+  theme = 'clear';
 
   city: string = '';
   cityFound = true;
@@ -139,7 +139,7 @@ export class AppComponent implements OnInit {
     if (themeData) {
       this.theme = themeData;
     } else {
-      this.theme = 'rain';
+      this.theme = 'clear';
       localStorage.setItem(LocalStorageKeys.theme, this.theme);
     }
   }

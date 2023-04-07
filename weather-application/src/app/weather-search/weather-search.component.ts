@@ -17,7 +17,7 @@ export class WeatherSearchComponent implements OnInit {
   @Input() cityName: string = '';
 
   date: string = new Date().toLocaleString();
-  theme = 'rain';
+  theme = 'clear';
 
   forecastModel: WeatherForecastModel | undefined = undefined;
   numOfDays = 4;
@@ -86,7 +86,7 @@ export class WeatherSearchComponent implements OnInit {
     if (themeData) {
       this.theme = themeData;
     } else {
-      this.theme = 'rain';
+      this.theme = 'clear';
       localStorage.setItem(LocalStorageKeys.favorites, this.theme);
     }
   }

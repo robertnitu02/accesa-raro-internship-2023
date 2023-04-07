@@ -212,4 +212,18 @@
       @include variables.tornado-content();
     }
   }
+
+  .clear {
+    &__navbar {
+      @include variables.clear-navbar();
+    }
+
+    &__content {
+      @include variables.clear-content();
+    }
+
+    &__footer {
+      @include variables.clear-content();
+    }
+  }
 }

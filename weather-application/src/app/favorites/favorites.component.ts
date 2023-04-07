@@ -12,7 +12,7 @@ export class FavoritesComponent implements OnInit {
   favoritesCity: Dictionary<WeatherModel> = {};
   favoritesCityList: { value: WeatherModel; key: string }[] = [];
 
-  theme = 'rain';
+  theme = 'clear';
 
   constructor() {}
 
@@ -48,7 +48,7 @@ export class FavoritesComponent implements OnInit {
     if (themeData) {
       this.theme = themeData;
     } else {
-      this.theme = 'rain';
+      this.theme = 'clear';
       localStorage.setItem(LocalStorageKeys.favorites, this.theme);
     }
   }

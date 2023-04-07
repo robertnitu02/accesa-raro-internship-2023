@@ -408,4 +408,14 @@
       @include variables.tornado-weather-content();
     }
   }
+
+  .clear {
+    &__background-image {
+      @include variables.clear-weather-content-image();
+    }
+
+    &__weather-content {
+      @include variables.clear-weather-content();
+    }
+  }
 }

@@ -12,6 +12,7 @@
   }
   grid-template-rows: 15% auto;
   @include mat.elevation(2);
+  border-radius: 2%;
 
   .info {
     display: grid;
@@ -112,5 +113,11 @@
 .tornado {
   &__content {
     @include variables.tornado-favorites-content();
+  }
+}
+
+.clear {
+  &__content {
+    @include variables.clear-favorites-content();
   }
 }
