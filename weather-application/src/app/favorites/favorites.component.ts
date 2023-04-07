@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Dictionary } from 'src/shared/models/dictionary';
 import { WeatherModel } from '../../shared/models/weather.model';
 import { LocalStorageKeys } from '../../shared/constants/constants';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-favorites',
@@ -14,7 +15,7 @@ export class FavoritesComponent implements OnInit {
 
   theme = 'clear';
 
-  constructor() {}
+  constructor(private translate: TranslateService) {}
 
   ngOnInit(): void {
     this.initDataFromLocalStorage();

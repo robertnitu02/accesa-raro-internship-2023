@@ -1,5 +1,33 @@
 {
   "weather-app": {
-    "enter-city": "Insert city name"
+    "enter-city": "Introdu numele orașului",
+    "home": "Acasă",
+    "favorites": "Favorite",
+    "show-weather": "Arată vremea",
+    "favorite-title": "Listă cu orașe favorite",
+    "no-favorite-cities": "Nu ai niciun oraș în lista de favorite",
+    "favorite-cities-plural": "Ai {{cities}} orașe în listă",
+    "favorite-cities-singular": "Ai un oraș în listă",
+    "pressure": "Preasure",
+    "humidity": "Humidity",
+    "wind": "Wind",
+    "show-forecast-plural": "Arată prognoza pentru {{days}} zile",
+    "show-forecast-singular": "Arată prognoza pentru o zi",
+    "like-this-city": "Îți place acest oraș?",
+    "how-to-like": "Apasă pe ❤️ pentru a-l adăuga la favorite!",
+    "messages": {
+      "city-not-found": "😢 Orașul nu a fost găsit!",
+      "enter-city-name": "✍️ Introdu numele unui oraș pentru a folosi aplicația", 
+      "loading": "Se încarcă ..."
+    },
+    "days": {
+      "monday": "Luni",
+      "tuesday": "Marți",
+      "wednesday": "Miercuri",
+      "thursday": "Joi",
+      "friday": "Vineri",
+      "saturday": "Sâmbătă",
+      "sunday": "Duminică"
+    }
   }
 }

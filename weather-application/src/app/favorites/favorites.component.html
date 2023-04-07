@@ -1,8 +1,11 @@
 <div class="favorites {{this.theme}}__content">
   <div class="info">
-    <span class="title">Your favorite's list</span>
+    <span class="title">{{'weather-app.favorite-title' | translate}}</span>
     <span
-      class="subtitle"> {{ favoritesCityList.length === 0 ? 'You don\`t have any favorite city' : 'You have ' + favoritesCityList.length + ' favorite cities' }}</span>
+      class="subtitle"> {{ favoritesCityList.length === 0 ? ('weather-app.no-favorite-cities' | translate) :
+      (favoritesCityList.length === 1 ?
+        ('weather-app.favorite-cities-singular' | translate) :
+        ('weather-app.favorite-cities-plural' | translate: { cities: favoritesCityList.length})) }}</span>
   </div>
   <div class="content">
     <ng-container *ngIf="favoritesCity !== undefined">

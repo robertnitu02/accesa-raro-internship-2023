@@ -54,6 +54,7 @@ export class AppComponent implements OnInit {
   }
 
   sendWeatherData() {
+    if (this.inputText === '') return;
     if (!this.firstUse && this.city === this.inputText) return;
     if (this.showWeatherTimeout) return;
     if (this.firstUse) this.firstUse = false;

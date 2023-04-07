@@ -4,7 +4,7 @@
       <div></div>
       <div class="general-info">
         <div class="day">
-          <span class="current-day">{{date | date: 'EEEE'}}</span>
+          <span class="current-day">{{ ('weather-app.days.' + (date | date: 'EEEE' | lowercase)) | translate }}</span>
           <span class="image">
             <img src="{{this.favoritesCity[this.cityName] ? favoriteIconsPath[0] : favoriteIconsPath[1]}}"
                  alt="Favorite" (click)="addToFavorite()">
@@ -33,10 +33,10 @@
       <div class="rain-information">
         <div></div>
         <div class="information">
-          <span class="precipitation title-text">Precipitation</span>
-          <span class="humidity title-text">Humidity</span>
-          <span class="wind title-text">Wind</span>
-          <span class="precipitation-value right-text">?%</span>
+          <span class="pressure title-text">{{'weather-app.pressure' | translate}}</span>
+          <span class="humidity title-text">{{'weather-app.humidity' | translate}}</span>
+          <span class="wind title-text">{{'weather-app.wind' | translate}}</span>
+          <span class="pressure-value right-text">{{weatherModel.main.pressure}}hPa</span>
           <span class="humidity-value right-text">{{weatherModel.main.humidity}}%</span>
           <span class="wind-value right-text">{{weatherModel.wind.speed}}km/h</span>
         </div>
@@ -45,7 +45,8 @@
       <div class="forecast-information">
         <div *ngFor="let forecast of forecastModel.list" class="forecast">
           <div class="forecast-icon">
-            <img src="https://openweathermap.org/img/wn/{{forecast.weather[0].icon}}@2x.png" alt="icon" class="image-{{numOfDays}}"/>
+            <img src="https://openweathermap.org/img/wn/{{forecast.weather[0].icon}}@2x.png" alt="icon"
+                 class="image-{{numOfDays}}"/>
           </div>
           <span class="forecast-day">Tue</span>
           <span class="forecast-temp">{{beautifyTemp(forecast.main.temp)}} °C</span>
@@ -53,7 +54,7 @@
       </div>
       <div class="footer">
         <div class="title">
-          Show Forecast for {{ this.numOfDays }} Days
+          {{ this.numOfDays === 1 ? ('weather-app.show-forecast-singular' | translate) : ('weather-app.show-forecast-plural' | translate: {days: this.numOfDays}) }}
         </div>
         <div class="set-forecast">
           <mat-slider [thumbLabel]="false"
@@ -61,8 +62,8 @@
                       step="1" min="1" max="7" aria-label="units"></mat-slider>
         </div>
         <div class="set-favorite">
-          <span class="title">You like this city?</span>
-          <span class="sub-title">Click ❤️ to save!</span>
+          <span class="title">{{'weather-app.like-this-city' | translate}}</span>
+          <span class="sub-title">{{'weather-app.how-to-like' | translate}}</span>
         </div>
       </div>
       <div></div>
