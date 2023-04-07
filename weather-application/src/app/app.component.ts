@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherService } from '../services/weather.service';
-import { constants, LocalStorageKeys } from '../shared/constants/constants';
+import { LocalStorageKeys } from '../shared/constants/constants';
 import { WeatherModel } from '../shared/models/weather.model';
 import { coordinates } from '../shared/models/weather-common.model';
 import { WeatherConditions } from '../shared/constants/weather-conditions';
+import { TranslateService } from '@ngx-translate/core';
+import defaultEnLanguage from '../shared/i18n/en.json';
+import defaultRoLanguage from '../shared/i18n/ro.json';
 
 export enum ViewState {
   HOME,
@@ -36,7 +39,14 @@ export class AppComponent implements OnInit {
 
   inputText: string = this.city;
 
-  constructor(private weatherService: WeatherService) {}
+  constructor(
+    private weatherService: WeatherService,
+    private translate: TranslateService
+  ) {
+    translate.setTranslation('en', defaultEnLanguage);
+    translate.setTranslation('ro', defaultRoLanguage);
+    translate.setDefaultLang('en');
+  }
 
   ngOnInit() {
     this.initDataFromLocalStorage();
@@ -123,6 +133,7 @@ export class AppComponent implements OnInit {
       this.language = 'ro';
       localStorage.setItem(LocalStorageKeys.language, this.language);
     }
+    this.translate.use(this.language);
 
     const themeData = localStorage.getItem(LocalStorageKeys.theme);
     if (themeData) {
@@ -154,6 +165,7 @@ export class AppComponent implements OnInit {
     this.language =
       this.language === 'ro' ? (this.language = 'en') : (this.language = 'ro');
     localStorage.setItem(LocalStorageKeys.language, this.language);
+    this.translate.use(this.language);
     this.getWeather(this.city, true);
   }
 }

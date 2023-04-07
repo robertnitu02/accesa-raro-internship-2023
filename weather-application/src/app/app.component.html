@@ -15,7 +15,7 @@
     <ng-container *ngIf="currentViewState === viewStates.HOME">
       <div class="weather">
         <div class="search">
-          <input class="input" type="text" placeholder="Insert City Name" [(ngModel)]="inputText">
+          <input class="input" type="text" placeholder="{{'weather-app.enter-city' | translate}}" [(ngModel)]="inputText">
           <button class="button" (click)="sendWeatherData()">Show Weather</button>
         </div>
         <ng-container *ngIf="this.firstUse && this.city === ''">

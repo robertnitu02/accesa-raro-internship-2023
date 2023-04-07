@@ -1,3 +1,5 @@
 {
-  
+  "weather-app": {
+    "enter-city": "Insert city name"
+  }
 }
