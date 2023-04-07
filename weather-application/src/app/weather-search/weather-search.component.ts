@@ -3,10 +3,7 @@ import { WeatherModel } from '../../shared/models/weather.model';
 import { WeatherForecastModel } from '../../shared/models/weather-forecast.model';
 import { WeatherService } from '../../services/weather.service';
 import { MatSliderChange } from '@angular/material/slider';
-
-interface Dictionary<T> {
-  [key: string]: T;
-}
+import { Dictionary } from 'src/shared/models/dictionary';
 
 @Component({
   selector: 'app-weather-search',
@@ -43,7 +40,9 @@ export class WeatherSearchComponent implements OnInit {
 
     const data = localStorage.getItem('FavoriteData');
     if (data !== null) this.favoritesCity = JSON.parse(data);
-    console.log('>>>' + JSON.stringify(this.favoritesCity));
+    console.log(
+      'WeatherSearchComponent >>>' + JSON.stringify(this.favoritesCity)
+    );
   }
 
   getWeatherForecast(cityName: string, numOfDays: number) {
@@ -71,9 +70,7 @@ export class WeatherSearchComponent implements OnInit {
     } else {
       if (this.weatherModel) {
         console.log('added ' + this.cityName);
-        this.favoritesCity[
-          this.cityName.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-        ] = this.weatherModel;
+        this.favoritesCity[this.cityName] = this.weatherModel;
       }
     }
     localStorage.setItem('FavoriteData', JSON.stringify(this.favoritesCity));

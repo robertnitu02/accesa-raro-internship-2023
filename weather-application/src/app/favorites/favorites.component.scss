@@ -1,0 +1,60 @@
+@use '@angular/material' as mat;
+@use '../../shared/styles/variables' as variables;
+
+.favorites {
+  display: grid;
+  padding: 2rem;
+  width: variables.$big-screen-content-width;
+  height: variables.$big-screen-content-height;
+  @media only screen and (max-width: variables.$responsive-max-width) {
+    width: variables.$low-screen-content-width;
+    height: variables.$low-screen-content-height;
+  }
+  grid-template-rows: 15% auto;
+  @include mat.elevation(2);
+  border-radius: 2%;
+
+  .info {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    color: white;
+
+    .title {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+    }
+  }
+
+  .content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    background-color: red;
+    overflow: auto;
+
+    .item {
+      display: flex;
+      width: 220px;
+      height: 165px;
+      border: 2px solid black;
+      background-color: blue;
+
+      .city {
+        display: grid;
+        padding: 1rem;
+        grid-template-rows: 60% 20% 20%;
+        color: white;
+
+        span:hover {
+          color: variables.$red;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

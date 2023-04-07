@@ -1,8 +1,8 @@
 <div class="app">
   <div class="nav-bar night__navbar">
     <div class="buttons">
-      <span class="clickable">Weather</span>
-      <span class="clickable">Favorites</span>
+      <span class="clickable {{currentViewState === viewStates.HOME ? 'active' : ''}}" (click)="currentViewState = viewStates.HOME">Weather</span>
+      <span class="clickable {{currentViewState === viewStates.FAVORITES ? 'active' : ''}}" (click)="currentViewState = viewStates.FAVORITES">Favorites</span>
       <span></span>
       <div class="interact">
         <span>Language:</span>
@@ -15,8 +15,8 @@
     </div>
   </div>
   <div class="content night__content">
-    <div class="weather">
-      <ng-container *ngIf="currentViewState === viewStates.HOME">
+    <ng-container *ngIf="currentViewState === viewStates.HOME">
+      <div class="weather">
         <div class="search">
           <input class="input" type="text" placeholder="Insert City Name" [(ngModel)]="inputText">
           <button class="button" (click)="sendWeatherData()">Show Weather</button>
@@ -33,13 +33,14 @@
         <ng-container *ngIf="this.cityFound && !this.showWeather && this.city !== ''">
           <app-loading></app-loading>
         </ng-container>
-      </ng-container>
-      <ng-container *ngIf="currentViewState === viewStates.FAVORITES">
-
-      </ng-container>
-    </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="currentViewState === viewStates.FAVORITES">
+      <app-favorites></app-favorites>
+    </ng-container>
   </div>
   <div class="footer night__content">
-    <span class="info">Nițu Robert - Accesa & RaRo Summer Internship 2023 | <a href="https://github.com/robertnitu02/accesa-raro-internship-2023" target="_blank">GitHub</a></span>
+    <span class="info">Nițu Robert - Accesa & RaRo Summer Internship 2023 | <a
+      href="https://github.com/robertnitu02/accesa-raro-internship-2023" target="_blank">GitHub</a></span>
   </div>
 </div>

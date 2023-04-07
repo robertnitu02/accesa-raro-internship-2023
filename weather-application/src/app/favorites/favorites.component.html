@@ -1,0 +1,17 @@
+<div class="favorites">
+  <div class="info">
+    <span class="title">Title</span>
+    <span class="subtitle">Subtitle</span>
+  </div>
+  <div class="content">
+    <ng-container *ngIf="favoritesCity !== undefined">
+      <div *ngFor="let city of favoritesCityList" class="item">
+        <div class="city">
+          <span>{{city.value.weather[0].icon}}</span>
+          <span>{{city.value.main.temp}}</span>
+          <span (click)="removeCity(city.key)">{{city.key}}</span>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

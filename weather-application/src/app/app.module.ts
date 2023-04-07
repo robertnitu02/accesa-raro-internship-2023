@@ -12,6 +12,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { CityNotFoundComponent } from './city-not-found/city-not-found.component';
 import { NgOptimizedImage } from '@angular/common';
 import { EnterCityComponent } from './enter-city/enter-city.component';
+import { FavoritesComponent } from './favorites/favorites.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { EnterCityComponent } from './enter-city/enter-city.component';
     LoadingComponent,
     CityNotFoundComponent,
     EnterCityComponent,
+    FavoritesComponent,
   ],
   imports: [
     BrowserModule,

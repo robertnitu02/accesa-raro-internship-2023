@@ -16,7 +16,7 @@ export enum ViewState {
 export class AppComponent implements OnInit {
   viewStates = ViewState;
 
-  currentViewState = this.viewStates.HOME;
+  currentViewState = this.viewStates.FAVORITES;
   coordinates: coordinates = {
     lat: -1,
     lon: -1,
