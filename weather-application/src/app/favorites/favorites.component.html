@@ -1,15 +1,16 @@
 <div class="favorites">
   <div class="info">
-    <span class="title">Title</span>
-    <span class="subtitle">Subtitle</span>
+    <span class="title">Your favorite's list</span>
+    <span
+      class="subtitle"> {{ favoritesCityList.length === 0 ? 'You don\`t have any favorite city' : 'You have ' + favoritesCityList.length + ' favorite cities' }}</span>
   </div>
   <div class="content">
     <ng-container *ngIf="favoritesCity !== undefined">
       <div *ngFor="let city of favoritesCityList" class="item">
         <div class="city">
-          <span>{{city.value.weather[0].icon}}</span>
-          <span>{{city.value.main.temp}}</span>
-          <span (click)="removeCity(city.key)">{{city.key}}</span>
+          <img src="https://openweathermap.org/img/wn/{{city.value.weather[0].icon}}@2x.png" alt="icon"/>
+          <span class="temperature">{{beautifyTemp(city.value.main.temp)}} °C</span>
+          <span class="city-name" (click)="removeCity(city.key)">{{city.key}}</span>
         </div>
       </div>
     </ng-container>

@@ -76,4 +76,8 @@ export class WeatherSearchComponent implements OnInit {
     localStorage.setItem('FavoriteData', JSON.stringify(this.favoritesCity));
     console.log(JSON.stringify(this.favoritesCity));
   }
+
+  beautifyTemp(temp: number) {
+    return Math.floor(temp);
+  }
 }

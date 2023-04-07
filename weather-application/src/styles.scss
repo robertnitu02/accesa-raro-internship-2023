@@ -44,3 +44,16 @@ textarea:focus, input:focus {
 *::-webkit-scrollbar-thumb {
   box-shadow: inset 0 0 0 10px;
 }
+
+.mat-accent .mat-slider-track-fill {
+  background-color: white !important;
+}
+
+.mat-slider-thumb-label {
+  background-color: white !important;
+
+}
+
+.mat-slider-thumb {
+  background-color: white !important;
+}

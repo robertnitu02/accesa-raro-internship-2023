@@ -4,31 +4,30 @@
       <div></div>
       <div class="general-info">
         <div class="day">
-          <span>{{date | date: 'EEEE'}}</span>
+          <span class="current-day">{{date | date: 'EEEE'}}</span>
           <span class="image">
-            <img src="{{this.favoritesCity[this.cityName] ? favoriteIconsPath[0] : favoriteIconsPath[1]}}" alt="Favorite" (click)="addToFavorite()">
+            <img src="{{this.favoritesCity[this.cityName] ? favoriteIconsPath[0] : favoriteIconsPath[1]}}"
+                 alt="Favorite" (click)="addToFavorite()">
           </span>
         </div>
         <div class="date">
-          {{date | date: 'mediumDate'}}
-        </div>
-        <div class="location">
-          <span>IMG</span>
-          <span>{{weatherModel.name}}, {{weatherModel.sys.country}}</span>
-          <span></span>
+          <span class="current-date">{{date | date: 'mediumDate'}}</span>
+          <div class="location">
+            <img src="./../../assets/images/location-pin.png" alt="pin" width="20px" height="20px" class="pin-image">
+            <span class="info-location">{{weatherModel.name}}, {{weatherModel.sys.country}}</span>
+          </div>
         </div>
       </div>
       <div></div>
-      <div class="image">
-        {{weatherModel.weather[0].icon}}
+      <div class="weather-icon">
+        <img src="https://openweathermap.org/img/wn/{{weatherModel.weather[0].icon}}@2x.png" alt="icon"/>
       </div>
-      <div class="weather">
-        {{weatherModel.main.temp}}
+      <div class="weather-info">
+        <div class="weather">
+          <span class="temperature">{{beautifyTemp(weatherModel.main.temp)}} °C</span>
+          <span class="details">{{weatherModel.weather[0].description}}</span>
+        </div>
       </div>
-      <div class="detail">
-        {{weatherModel.weather[0].description}}
-      </div>
-      <div></div>
     </div>
     <div class="more-information">
       <div class="rain-information">
@@ -45,9 +44,11 @@
       </div>
       <div class="forecast-information">
         <div *ngFor="let forecast of forecastModel.list" class="forecast">
-          <span>{{forecast.weather[0].icon}}</span>
-          <span>Tue</span>
-          <span>{{forecast.main.temp}}</span>
+          <div class="forecast-icon">
+            <img src="https://openweathermap.org/img/wn/{{forecast.weather[0].icon}}@2x.png" alt="icon" class="image-{{numOfDays}}"/>
+          </div>
+          <span class="forecast-day">Tue</span>
+          <span class="forecast-temp">{{beautifyTemp(forecast.main.temp)}} °C</span>
         </div>
       </div>
       <div class="footer">
@@ -61,7 +62,7 @@
         </div>
         <div class="set-favorite">
           <span class="title">You like this city?</span>
-          <span class="sub-title">Press ❤️ to save!</span>
+          <span class="sub-title">Click ❤️ to save!</span>
         </div>
       </div>
       <div></div>

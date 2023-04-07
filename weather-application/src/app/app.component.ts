@@ -107,10 +107,6 @@ export class AppComponent implements OnInit {
   }
 
   /* --- Utils ---- */
-  private IsCoordinatesValid() {
-    return this.coordinates.lat !== -1 && this.coordinates.lon !== -1;
-  }
-
   private searchForWeatherCityDelay() {
     this.showWeather = false;
     this.showWeatherTimeout = setTimeout(() => {

@@ -34,4 +34,8 @@ export class FavoritesComponent implements OnInit {
       return { key: key, value: this.favoritesCity[key] };
     });
   }
+
+  beautifyTemp(temp: number) {
+    return Math.floor(temp);
+  }
 }

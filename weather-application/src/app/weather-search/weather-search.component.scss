@@ -14,8 +14,10 @@
     width: 100%;
     height: 100%;
     padding: 0.5rem;
-    grid-template-rows: 5% 25% 15% 15% 25% 10% 5%;
-    background-color: blue;
+    grid-template-rows: 5% 25% 35% 15% auto;
+    background-image: url("https://i.imgur.com/rU2r6X1.jpg");
+    @include mat.elevation(24);
+
     border: {
       bottom-left-radius: 2%;
     };
@@ -23,11 +25,22 @@
     .general-info {
       display: grid;
       grid-template-rows: repeat(3, 1fr);
+      grid-gap: 0.5rem;
 
       .day {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        color: black;
+        grid-template-columns: 60% 40%;
+
+        .current-day {
+          display: grid;
+          align-items: end;
+          color: variables.$white;
+          font-size: 2rem;
+          @media only screen and (max-width: variables.$responsive-max-width) {
+            font-size: 1.5rem;
+          }
+          font-weight: bold;
+        }
 
         .image {
           margin-right: 0.5rem;
@@ -45,12 +58,62 @@
       }
 
       .date {
-        color: black;
-      }
-
-      .location {
         display: grid;
-        grid-template-columns: 10% 50% auto;
+        grid-template-rows: 40% 60%;
+        color: variables.$white;
+        grid-gap: 0.5rem;
+
+        .location {
+          display: grid;
+          align-content: center;
+          align-items: start;
+          grid-template-columns: 8% 50% auto;
+          @media only screen and (max-width: variables.$responsive-max-width) {
+            grid-template-columns: 20% 80%;
+          }
+
+          .current-date {
+            font-size: 0.8rem;
+          }
+
+          .info-location {
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+
+    .weather-icon {
+      & > img {
+        width: fit-content;
+        height: fit-content;
+      }
+    }
+
+    .weather-info {
+      display: grid;
+      align-items: start;
+      @media only screen and (max-width: variables.$responsive-max-width) {
+        align-items: center;
+      }
+      padding-left: 1rem;
+
+      .weather {
+        display: grid;
+        grid-gap: 0.5rem;
+
+        .temperature {
+          font-size: 1.75rem;
+          font-weight: bold;
+          @media only screen and (max-width: variables.$responsive-max-width) {
+            font-size: 1.2rem;
+            font-weight: bold;
+          }
+        }
+
+        .details {
+          font-size: 1.1rem;
+        }
       }
     }
   }
@@ -60,7 +123,7 @@
     width: 100%;
     height: 100%;
     grid-template-rows: 25% 30% 40% 5%;
-    background-color: #005900;
+    background: linear-gradient(to top, #09203f 0%, #537895 100%);
     border: {
       bottom-right-radius: 2%;
     };
@@ -71,7 +134,6 @@
       height: 100%;
       padding: 1rem;
       grid-template-rows: 10% 80% 10%;
-      background-color: rgb(104, 51, 161);
 
       .information {
         display: grid;
@@ -143,16 +205,95 @@
       padding: 0.5rem;
       gap: 0.5rem;
       flex-direction: row;
-      background-color: rgb(42, 22, 63);
 
       .forecast {
         display: grid;
         border: 1px solid black;
-        background: linear-gradient(to top, #1e3c72 0%, #1e3c72 1%, #2a5298 80%);
-        border-radius: 15%;
+        //background: linear-gradient(to top, #1e3c72 0%, #1e3c72 1%, #2a5298 0%);
+        border-radius: 10%;
         width: 100%;
         height: 100%;
         grid-template-rows: 1fr 1fr 1fr;
+
+        .forecast-icon {
+          display: grid;
+          place-items: center;
+
+          .image-1 {
+            width: 75px;
+            height: 75px;
+            @media only screen and (max-width: variables.$responsive-max-width) {
+              width: 74px;
+              height: 59px;
+            }
+          }
+
+          .image-2 {
+            width: 50px;
+            height: 50px;
+            @media only screen and (max-width: variables.$responsive-max-width) {
+              width: 50px;
+              height: 35px;
+            }
+          }
+
+          .image-3 {
+            width: 50px;
+            height: 50px;
+            @media only screen and (max-width: variables.$responsive-max-width) {
+              width: 45px;
+              height: 30px;
+            }
+          }
+
+          .image-4 {
+            width: 50px;
+            height: 50px;
+            @media only screen and (max-width: variables.$responsive-max-width) {
+              width: 40px;
+              height: 25px;
+            }
+          }
+
+          .image-5 {
+            width: 50px;
+            height: 50px;
+            @media only screen and (max-width: variables.$responsive-max-width) {
+              width: 20px;
+              height: 10px;
+            }
+          }
+
+          .image-6 {
+            width: 50px;
+            height: 50px;
+            @media only screen and (max-width: variables.$responsive-max-width) {
+              width: 10px;
+              height: 10px;
+            }
+          }
+
+          .image-7 {
+            width: 50px;
+            height: 50px;
+            @media only screen and (max-width: variables.$responsive-max-width) {
+              width: 50%;
+              height: 50%;
+            }
+          }
+        }
+
+        .forecast-day {
+          font-size: 0.8rem;
+        }
+
+        .forecast-temp {
+          font-size: 1.2rem;
+          font-weight: bold;
+          @media only screen and (max-width: variables.$responsive-max-width) {
+            font-size: 0.8rem;
+          }
+        }
 
         span {
           display: grid;
@@ -168,7 +309,6 @@
       padding: 1rem;
       width: 100%;
       height: 100%;
-      background-color: rgb(98, 1, 1);
       border: {
         bottom-right-radius: 2%;
       };
