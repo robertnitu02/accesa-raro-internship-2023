@@ -1,0 +1,33 @@
+{
+  "weather-app": {
+    "enter-city": "Insert city name",
+    "home": "Home",
+    "favorites": "Favorites",
+    "show-weather": "Show weather",
+    "favorite-title": "List of favorite cities",
+    "no-favorite-cities": "You have no cities in your favorites list",
+    "favorite-cities-plural": "You have {{cities}} cities in the list",
+    "favorite-cities-singular": "You have 1 city in the list",
+    "pressure": "Preasure",
+    "humidity": "Humidity",
+    "wind": "Wind",
+    "show-forecast-plural": "Show the forecast for {{days}} days",
+    "show-forecast-singular": "Show forecast for one day",
+    "like-this-city": "Do you like this city?",
+    "how-to-like": "Click ❤️ to add it to your favorites!",
+    "messages": {
+      "city-not-found": "😢 City not Found!",
+      "enter-city-name": "✍️ Enter a city name to use this application",
+      "loading": "Loading ..."
+    },
+    "days": {
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday",
+      "sunday": "Sunday"
+    }
+  }
+}

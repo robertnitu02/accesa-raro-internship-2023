@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Dictionary } from 'src/shared/models/dictionary';
 import { WeatherModel } from '../../shared/models/weather.model';
 import { LocalStorageKeys } from '../../shared/constants/constants';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-favorites',
@@ -12,9 +13,9 @@ export class FavoritesComponent implements OnInit {
   favoritesCity: Dictionary<WeatherModel> = {};
   favoritesCityList: { value: WeatherModel; key: string }[] = [];
 
-  theme = 'rain';
+  theme = 'clear';
 
-  constructor() {}
+  constructor(private translate: TranslateService) {}
 
   ngOnInit(): void {
     this.initDataFromLocalStorage();
@@ -48,7 +49,7 @@ export class FavoritesComponent implements OnInit {
     if (themeData) {
       this.theme = themeData;
     } else {
-      this.theme = 'rain';
+      this.theme = 'clear';
       localStorage.setItem(LocalStorageKeys.favorites, this.theme);
     }
   }

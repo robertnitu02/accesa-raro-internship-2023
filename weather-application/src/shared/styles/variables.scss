@@ -37,9 +37,7 @@ $low-screen-content-height: 550px;
 
 @mixin rain-favorites-content {
   background: linear-gradient(to top, #09203f 0%, #537895 100%);
-  border-radius: 2%;
 }
-
 
 @mixin thunderstorm-navbar {
   background: linear-gradient(109.6deg, rgb(20, 30, 48) 11.2%, rgb(36, 59, 85) 91.1%);
@@ -159,4 +157,23 @@ $low-screen-content-height: 550px;
 
 @mixin tornado-favorites-content {
   background: linear-gradient(177.9deg, rgb(58, 62, 88) 3.6%, rgb(119, 127, 148) 105.8%);
+}
+
+@mixin clear-navbar {
+  background: linear-gradient(69.8deg, rgb(61, 98, 187) 2.8%, rgb(35, 159, 176) 97.8%);
+}
+@mixin clear-content {
+  background: linear-gradient(121.7deg, rgb(41, 116, 250) 22.9%, rgb(75, 150, 176) 69%);
+}
+
+@mixin clear-weather-content {
+  background: linear-gradient(109.6deg, rgb(64, 89, 217) 11.2%, rgb(38, 206, 245) 91.1%);
+}
+
+@mixin clear-weather-content-image {
+  background-image: url("../../assets/images/themes/clear.png");
+}
+
+@mixin clear-favorites-content {
+  background: linear-gradient(109.6deg, rgb(64, 89, 217) 11.2%, rgb(38, 206, 245) 91.1%);
 }

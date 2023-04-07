@@ -1,12 +1,15 @@
 <div class="app">
   <div class="nav-bar {{this.theme}}__navbar">
     <div class="buttons">
-      <span class="clickable {{currentViewState === viewStates.HOME ? 'active' : ''}}" (click)="currentViewState = viewStates.HOME">Weather</span>
-      <span class="clickable {{currentViewState === viewStates.FAVORITES ? 'active' : ''}}" (click)="currentViewState = viewStates.FAVORITES">Favorites</span>
+      <span class="clickable {{currentViewState === viewStates.HOME ? 'active' : ''}}"
+            (click)="currentViewState = viewStates.HOME">{{'weather-app.home' | translate}}</span>
+      <span class="clickable {{currentViewState === viewStates.FAVORITES ? 'active' : ''}}"
+            (click)="currentViewState = viewStates.FAVORITES">{{'weather-app.favorites' | translate}}</span>
       <span></span>
       <div class="interact">
         <span class="clickable">
-          <img src="./assets/images/{{language}}.png" alt="language" (click)="changeLanguage()" width="35px" height="35px"/>
+          <img src="./assets/images/{{language}}.png" alt="language" (click)="changeLanguage()" width="35px"
+               height="35px"/>
         </span>
       </div>
     </div>
@@ -15,8 +18,9 @@
     <ng-container *ngIf="currentViewState === viewStates.HOME">
       <div class="weather">
         <div class="search">
-          <input class="input" type="text" placeholder="Insert City Name" [(ngModel)]="inputText">
-          <button class="button" (click)="sendWeatherData()">Show Weather</button>
+          <input class="input" type="text" placeholder="{{'weather-app.enter-city' | translate}}"
+                 [(ngModel)]="inputText">
+          <button class="button" (click)="sendWeatherData()">{{'weather-app.show-weather' | translate}}</button>
         </div>
         <ng-container *ngIf="this.firstUse && this.city === ''">
           <app-enter-city></app-enter-city>

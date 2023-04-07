@@ -4,8 +4,8 @@ import { WeatherForecastModel } from '../../shared/models/weather-forecast.model
 import { WeatherService } from '../../services/weather.service';
 import { MatSliderChange } from '@angular/material/slider';
 import { Dictionary } from 'src/shared/models/dictionary';
-import { WeatherConditions } from '../../shared/constants/weather-conditions';
 import { LocalStorageKeys } from '../../shared/constants/constants';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-weather-search',
@@ -17,7 +17,7 @@ export class WeatherSearchComponent implements OnInit {
   @Input() cityName: string = '';
 
   date: string = new Date().toLocaleString();
-  theme = 'rain';
+  theme = 'clear';
 
   forecastModel: WeatherForecastModel | undefined = undefined;
   numOfDays = 4;
@@ -28,7 +28,10 @@ export class WeatherSearchComponent implements OnInit {
     './../assets/images/no-favorite.png',
   ];
 
-  constructor(private weatherService: WeatherService) {}
+  constructor(
+    private weatherService: WeatherService,
+    private translate: TranslateService
+  ) {}
 
   ngOnInit(): void {
     // console.log(`cityName:`);
@@ -86,7 +89,7 @@ export class WeatherSearchComponent implements OnInit {
     if (themeData) {
       this.theme = themeData;
     } else {
-      this.theme = 'rain';
+      this.theme = 'clear';
       localStorage.setItem(LocalStorageKeys.favorites, this.theme);
     }
   }

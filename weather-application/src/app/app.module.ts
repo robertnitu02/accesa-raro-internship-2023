@@ -14,6 +14,10 @@ import { NgOptimizedImage } from '@angular/common';
 import { EnterCityComponent } from './enter-city/enter-city.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,8 +35,19 @@ import { FavoritesComponent } from './favorites/favorites.component';
     MatProgressSpinnerModule,
     MatSliderModule,
     NgOptimizedImage,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
+}
