@@ -12,7 +12,7 @@ export class FavoritesComponent implements OnInit {
   favoritesCity: Dictionary<WeatherModel> = {};
   favoritesCityList: { value: WeatherModel; key: string }[] = [];
 
-  theme = 'thunderstorm';
+  theme = 'rain';
 
   constructor() {}
 

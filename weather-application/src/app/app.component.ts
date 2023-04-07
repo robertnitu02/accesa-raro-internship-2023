@@ -3,6 +3,8 @@ import { WeatherService } from '../services/weather.service';
 import { constants, LocalStorageKeys } from '../shared/constants/constants';
 import { WeatherModel } from '../shared/models/weather.model';
 import { coordinates } from '../shared/models/weather-common.model';
+import { WeatherConditions } from '../shared/constants/weather-conditions';
+
 export enum ViewState {
   HOME,
   FAVORITES,
@@ -85,6 +87,7 @@ export class AppComponent implements OnInit {
       next: (res) => {
         this.weatherData = res;
         this.cityFound = true;
+        this.updateTheme();
         console.log(`getWeather: ${JSON.stringify(this.weatherData)}`);
       },
       error: (error) => {
@@ -136,6 +139,15 @@ export class AppComponent implements OnInit {
       this.showWeather = true;
       this.showWeatherTimeout = undefined;
     }, 1000);
+  }
+
+  private updateTheme() {
+    console.log(`enter`);
+    if (this.weatherData) {
+      this.theme = WeatherConditions[this.weatherData.weather[0].id.toString()];
+      console.log(`this.theme: ${this.theme}`);
+      localStorage.setItem(LocalStorageKeys.theme, this.theme);
+    }
   }
 
   changeLanguage() {

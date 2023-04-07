@@ -32,10 +32,131 @@ $low-screen-content-height: 550px;
 }
 
 @mixin rain-weather-content-image {
-  background-image: url("https://i.imgur.com/rU2r6X1.jpg");
+  background-image: url("../../assets/images/themes/rain.png");
 }
 
 @mixin rain-favorites-content {
   background: linear-gradient(to top, #09203f 0%, #537895 100%);
   border-radius: 2%;
+}
+
+
+@mixin thunderstorm-navbar {
+  background: linear-gradient(109.6deg, rgb(20, 30, 48) 11.2%, rgb(36, 59, 85) 91.1%);
+}
+
+@mixin thunderstorm-content {
+  background: radial-gradient(circle at 10% 20%, rgb(90, 92, 106) 0%, rgb(32, 45, 58) 81.3%);
+}
+
+@mixin thunderstorm-weather-content {
+  background: linear-gradient(180.2deg, rgb(30, 33, 48) 6.8%, rgb(74, 98, 110) 131%);
+}
+
+@mixin thunderstorm-weather-content-image {
+  background-image: url("../../assets/images/themes/thunderstorm.png");
+}
+
+@mixin thunderstorm-favorites-content {
+  background: linear-gradient(180.2deg, rgb(30, 33, 48) 6.8%, rgb(74, 98, 110) 131%);
+}
+
+@mixin snow-navbar {
+  background: linear-gradient(109.6deg, rgb(151, 157, 166) 11.2%, rgb(237, 246, 250) 100.2%);
+}
+
+@mixin snow-content {
+  background: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);
+}
+
+@mixin snow-weather-content {
+  background: linear-gradient(109.6deg, rgb(151, 157, 166) 11.2%, rgb(237, 246, 250) 100.2%);
+}
+
+@mixin snow-weather-content-image {
+  background-image: url("../../assets/images/themes/snow.png");
+}
+
+@mixin snow-favorites-content {
+  background: linear-gradient(109.6deg, rgb(151, 157, 166) 11.2%, rgb(237, 246, 250) 100.2%);
+}
+
+@mixin mist-navbar {
+  background: radial-gradient(666px at 0.4% 48%, rgb(202, 204, 227) 0%, rgb(89, 89, 99) 97.5%);
+}
+
+@mixin mist-content {
+  background: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);
+}
+
+@mixin mist-weather-content {
+  background: radial-gradient(666px at 0.4% 48%, rgb(202, 204, 227) 0%, rgb(89, 89, 99) 97.5%);
+}
+
+@mixin mist-weather-content-image {
+  background-image: url("../../assets/images/themes/mist.png");
+}
+
+@mixin mist-favorites-content {
+  background: radial-gradient(666px at 0.4% 48%, rgb(202, 204, 227) 0%, rgb(89, 89, 99) 97.5%);
+}
+
+@mixin dust-navbar {
+  background: radial-gradient(755px at 10.1% 95.3%, rgb(242, 188, 141) 0%, rgb(242, 159, 141) 100.2%);
+}
+
+@mixin dust-content {
+  background: linear-gradient(to top, #e6b980 0%, #eacda3 100%);
+}
+
+@mixin dust-weather-content {
+  background: linear-gradient(to top, #c79081 0%, #dfa579 100%);
+}
+
+@mixin dust-weather-content-image {
+  background-image: url("../../assets/images/themes/dust.png");
+}
+
+@mixin dust-favorites-content {
+  background: linear-gradient(to top, #c79081 0%, #dfa579 100%);
+}
+
+@mixin clouds-navbar {
+  background: linear-gradient(109.6deg, rgb(44, 83, 131) 18.9%, rgb(95, 175, 201) 91.1%);
+}
+
+@mixin clouds-content {
+  background: linear-gradient(111.5deg, rgb(187, 232, 255) 11.1%, rgb(4, 78, 116) 107.5%);
+}
+
+@mixin clouds-weather-content {
+  background: radial-gradient(circle at 10% 20%, rgb(147, 230, 241) 0%, rgb(145, 192, 241) 45.5%);
+}
+
+@mixin clouds-weather-content-image {
+  background-image: url("../../assets/images/themes/clouds.png");
+}
+
+@mixin clouds-favorites-content {
+  background: radial-gradient(circle at 10% 20%, rgb(147, 230, 241) 0%, rgb(145, 192, 241) 45.5%);
+}
+
+@mixin tornado-navbar {
+  background: linear-gradient(69.9deg, rgb(76, 79, 106) 3.2%, rgb(118, 124, 163) 97.6%);
+}
+
+@mixin tornado-content {
+  background: linear-gradient(180.3deg, rgb(221, 221, 221) 5.5%, rgb(110, 136, 161) 90.2%);
+}
+
+@mixin tornado-weather-content {
+  background: linear-gradient(177.9deg, rgb(58, 62, 88) 3.6%, rgb(119, 127, 148) 105.8%);
+}
+
+@mixin tornado-weather-content-image {
+  background-image: url("../../assets/images/themes/tornado.png");
+}
+
+@mixin tornado-favorites-content {
+  background: linear-gradient(177.9deg, rgb(58, 62, 88) 3.6%, rgb(119, 127, 148) 105.8%);
 }

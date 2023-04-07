@@ -117,7 +117,7 @@
 
   .rain {
     &__navbar {
-      @include variables.rain-navbar;
+      @include variables.rain-navbar();
     }
 
     &__content {
@@ -126,6 +126,90 @@
 
     &__footer {
       @include variables.rain-content();
+    }
+  }
+
+  .thunderstorm {
+    &__navbar {
+      @include variables.thunderstorm-navbar();
+    }
+
+    &__content {
+      @include variables.thunderstorm-content();
+    }
+
+    &__footer {
+      @include variables.thunderstorm-content();
+    }
+  }
+
+  .snow {
+    &__navbar {
+      @include variables.snow-navbar();
+    }
+
+    &__content {
+      @include variables.snow-content();
+    }
+
+    &__footer {
+      @include variables.snow-content();
+    }
+  }
+
+  .mist {
+    &__navbar {
+      @include variables.mist-navbar();
+    }
+
+    &__content {
+      @include variables.mist-content();
+    }
+
+    &__footer {
+      @include variables.mist-content();
+    }
+  }
+
+  .dust {
+    &__navbar {
+      @include variables.dust-navbar();
+    }
+
+    &__content {
+      @include variables.dust-content();
+    }
+
+    &__footer {
+      @include variables.dust-content();
+    }
+  }
+
+  .clouds {
+    &__navbar {
+      @include variables.clouds-navbar();
+    }
+
+    &__content {
+      @include variables.clouds-content();
+    }
+
+    &__footer {
+      @include variables.clouds-content();
+    }
+  }
+
+  .tornado {
+    &__navbar {
+      @include variables.tornado-navbar();
+    }
+
+    &__content {
+      @include variables.tornado-content();
+    }
+
+    &__footer {
+      @include variables.tornado-content();
     }
   }
 }

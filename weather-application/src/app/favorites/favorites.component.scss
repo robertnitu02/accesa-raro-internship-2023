@@ -75,6 +75,42 @@
 
 .rain {
   &__content {
-    @include variables.rain-favorites-content;
+    @include variables.rain-favorites-content();
+  }
+}
+
+.thunderstorm {
+  &__content {
+    @include variables.thunderstorm-favorites-content();
+  }
+}
+
+.snow {
+  &__content {
+    @include variables.snow-favorites-content();
+  }
+}
+
+.mist {
+  &__content {
+    @include variables.mist-favorites-content();
+  }
+}
+
+.dust {
+  &__content {
+    @include variables.dust-favorites-content();
+  }
+}
+
+.clouds {
+  &__content {
+    @include variables.clouds-favorites-content();
+  }
+}
+
+.tornado {
+  &__content {
+    @include variables.tornado-favorites-content();
   }
 }

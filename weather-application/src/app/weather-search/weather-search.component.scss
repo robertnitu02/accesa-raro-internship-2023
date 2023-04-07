@@ -35,8 +35,10 @@
           align-items: end;
           color: variables.$white;
           font-size: 2rem;
+          line-height: 2rem;
           @media only screen and (max-width: variables.$responsive-max-width) {
             font-size: 1.5rem;
+            line-height: 1.5rem;
           }
           font-weight: bold;
         }
@@ -73,10 +75,12 @@
 
           .current-date {
             font-size: 0.8rem;
+            line-height: 0.8rem;
           }
 
           .info-location {
             font-size: 0.8rem;
+            line-height: 0.8rem;
           }
         }
       }
@@ -337,11 +341,71 @@
 
   .rain {
     &__background-image {
-      @include variables.rain-weather-content-image;
+      @include variables.rain-weather-content-image();
     }
 
     &__weather-content {
-      @include variables.rain-weather-content;
+      @include variables.rain-weather-content();
+    }
+  }
+
+  .thunderstorm {
+    &__background-image {
+      @include variables.thunderstorm-weather-content-image();
+    }
+
+    &__weather-content {
+      @include variables.thunderstorm-weather-content();
+    }
+  }
+
+  .snow {
+    &__background-image {
+      @include variables.snow-weather-content-image();
+    }
+
+    &__weather-content {
+      @include variables.snow-weather-content();
+    }
+  }
+
+  .mist {
+    &__background-image {
+      @include variables.mist-weather-content-image();
+    }
+
+    &__weather-content {
+      @include variables.mist-weather-content();
+    }
+  }
+
+  .dust {
+    &__background-image {
+      @include variables.dust-weather-content-image();
+    }
+
+    &__weather-content {
+      @include variables.dust-weather-content();
+    }
+  }
+
+  .clouds {
+    &__background-image {
+      @include variables.clouds-weather-content-image();
+    }
+
+    &__weather-content {
+      @include variables.clouds-weather-content();
+    }
+  }
+
+  .tornado {
+    &__background-image {
+      @include variables.tornado-weather-content-image();
+    }
+
+    &__weather-content {
+      @include variables.tornado-weather-content();
     }
   }
 }
