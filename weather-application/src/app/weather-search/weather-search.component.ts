@@ -3,7 +3,10 @@ import { WeatherModel } from '../../shared/models/weather.model';
 import { WeatherForecastModel } from '../../shared/models/weather-forecast.model';
 import { MatSliderChange } from '@angular/material/slider';
 import { Dictionary } from 'src/shared/models/dictionary';
-import { LocalStorageKeys } from '../../shared/constants/constants';
+import {
+  DefaultValues,
+  LocalStorageKeys,
+} from '../../shared/constants/constants';
 import { TranslateService } from '@ngx-translate/core';
 import { list } from '../../shared/models/weather-common.model';
 
@@ -18,7 +21,7 @@ export class WeatherSearchComponent implements OnInit {
   @Input() cityName: string = '';
 
   date: Date = new Date();
-  theme = 'clear';
+  theme = DefaultValues.theme;
 
   showForecastList: list[] = [];
   forecastDateList: Date[] = [];
@@ -41,7 +44,7 @@ export class WeatherSearchComponent implements OnInit {
     // console.log(this.forecastData);
     setInterval(() => {
       this.date = new Date();
-    }, 1000);
+    }, 10000);
 
     this.initDataFromLocalStorage();
     this.initForecastList();
@@ -76,7 +79,7 @@ export class WeatherSearchComponent implements OnInit {
     if (themeData) {
       this.theme = themeData;
     } else {
-      this.theme = 'clear';
+      this.theme = DefaultValues.theme;
       localStorage.setItem(LocalStorageKeys.favorites, this.theme);
     }
   }

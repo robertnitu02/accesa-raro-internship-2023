@@ -1,13 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherService } from '../services/weather.service';
-import { LocalStorageKeys } from '../shared/constants/constants';
+import {
+  DefaultValues,
+  Languages,
+  LocalStorageKeys,
+  StateOfDay,
+} from '../shared/constants/constants';
 import { WeatherModel } from '../shared/models/weather.model';
 import { coordinates } from '../shared/models/weather-common.model';
 import { WeatherConditions } from '../shared/constants/weather-conditions';
 import { TranslateService } from '@ngx-translate/core';
+import { WeatherForecastModel } from '../shared/models/weather-forecast.model';
 import defaultEnLanguage from '../shared/i18n/en.json';
 import defaultRoLanguage from '../shared/i18n/ro.json';
-import { WeatherForecastModel } from '../shared/models/weather-forecast.model';
 
 export enum ViewState {
   HOME,
@@ -32,11 +37,11 @@ export class AppComponent implements OnInit {
   forecastData: WeatherForecastModel | undefined = undefined;
   showWeatherTimeout: any | undefined = undefined;
 
-  language = 'ro';
-  stateOfDay = 'day';
-  theme = 'clear';
   city: string = '';
   inputText: string = '';
+  language = Languages.romanian;
+  stateOfDay = StateOfDay.day;
+  theme = DefaultValues.theme;
   cityFound = true;
   showWeather = false;
   firstUse = true;
@@ -88,6 +93,7 @@ export class AppComponent implements OnInit {
       next: (res) => {
         this.weatherData = res;
         this.cityFound = true;
+        this.updateTheme();
         this.getWeatherForecast(this.city);
         // console.log(`getWeather: ${JSON.stringify(this.weatherData)}`);
       },
@@ -119,6 +125,7 @@ export class AppComponent implements OnInit {
         this.weatherData = res;
         this.city = this.weatherData.name;
         this.inputText = this.city;
+        this.updateTheme();
         this.getWeatherForecast(this.city);
         // console.log('getWeatherByCoordinates:');
         // console.log(this.weatherData);
@@ -133,7 +140,7 @@ export class AppComponent implements OnInit {
     if (langData) {
       this.language = langData;
     } else {
-      this.language = 'ro';
+      this.language = Languages.romanian;
       localStorage.setItem(LocalStorageKeys.language, this.language);
     }
     this.translate.use(this.language);
@@ -142,7 +149,7 @@ export class AppComponent implements OnInit {
     if (themeData) {
       this.theme = themeData;
     } else {
-      this.theme = 'clear';
+      this.theme = DefaultValues.theme;
       localStorage.setItem(LocalStorageKeys.theme, this.theme);
     }
   }
@@ -162,8 +169,8 @@ export class AppComponent implements OnInit {
       // console.log(`this.theme: ${this.theme}`);
       localStorage.setItem(LocalStorageKeys.theme, this.theme);
       this.stateOfDay = this.weatherData.weather[0].icon.includes('d')
-        ? 'day'
-        : 'night';
+        ? StateOfDay.day
+        : StateOfDay.night;
     }
   }
 
@@ -181,7 +188,9 @@ export class AppComponent implements OnInit {
 
   changeLanguage() {
     this.language =
-      this.language === 'ro' ? (this.language = 'en') : (this.language = 'ro');
+      this.language === Languages.romanian
+        ? (this.language = Languages.english)
+        : (this.language = Languages.romanian);
     localStorage.setItem(LocalStorageKeys.language, this.language);
     this.translate.use(this.language);
     if (this.inputText !== '') this.getWeather(this.city, true);

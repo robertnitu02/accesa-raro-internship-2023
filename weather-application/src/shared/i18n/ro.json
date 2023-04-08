@@ -17,7 +17,7 @@
     "how-to-like": "Apasă pe ❤️ pentru a-l adăuga la favorite!",
     "messages": {
       "city-not-found": "😢 Orașul nu a fost găsit!",
-      "enter-city-name": "✍️ Introdu numele unui oraș pentru a folosi aplicația", 
+      "enter-city-name": "✍️ Introdu numele unui oraș pentru a folosi aplicația",
       "loading": "Se încarcă ..."
     },
     "days": {
@@ -37,6 +37,20 @@
       "fri": "Vin",
       "sat": "Sâm",
       "sun": "Dum"
+    },
+    "months": {
+      "january": "Ianuarie",
+      "february": "Februarie",
+      "march": "Martie",
+      "april": "Aprilie",
+      "may": "Mai",
+      "june": "Iunie",
+      "july": "Iulie",
+      "august": "August",
+      "september": "Septembrie",
+      "october": "Octombrie",
+      "november": "Noiembrie",
+      "december": "Decembrie"
     }
   }
 }

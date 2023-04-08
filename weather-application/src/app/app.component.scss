@@ -36,6 +36,11 @@
       .clickable:hover {
         cursor: pointer;
       }
+
+      .language-image {
+        width: 35px;
+        height: 35px;
+      }
     }
 
     .interact {
@@ -59,7 +64,6 @@
       }
       grid-template-rows: 15% auto;
       @include mat.elevation(2);
-      border-radius: 2%;
 
       .search {
         display: grid;

@@ -11,9 +11,10 @@
           </span>
         </div>
         <div class="date">
-          <span class="current-date">{{date | date: 'mediumDate'}}</span>
+          <span
+            class="current-date">{{date | date: 'd'}} {{ ('weather-app.months.' + (date | date: 'MMMM' | lowercase)) | translate}} {{date | date: 'y'}}</span>
           <div class="location">
-            <img src="assets/images/location-pin.png" alt="pin" width="20px" height="20px" class="pin-image">
+            <img src="assets/images/location-pin.png" alt="pin" class="pin-image">
             <span class="info-location">{{weatherData.name}}, {{weatherData.sys.country}}</span>
           </div>
         </div>
@@ -48,7 +49,8 @@
             <img src="https://openweathermap.org/img/wn/{{forecast.weather[0].icon}}@2x.png" alt="icon"
                  class="image-{{numOfDays}}"/>
           </div>
-          <span class="forecast-day">{{('weather-app.days-short.' + (this.forecastDateList[day] | date: 'EEE' | lowercase)) | translate}}</span>
+          <span
+            class="forecast-day">{{('weather-app.days-short.' + (this.forecastDateList[day] | date: 'EEE' | lowercase)) | translate}}</span>
           <span class="forecast-temp">{{beautifyTemp(forecast.main.temp)}} °C</span>
         </div>
       </div>

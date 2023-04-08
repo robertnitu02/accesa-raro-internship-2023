@@ -1,5 +1,5 @@
-export const constants = {
-  startupCity: 'Pucioasa',
+export const DefaultValues = {
+  theme: 'clear',
 };
 
 export const APIConstants = {
@@ -13,4 +13,14 @@ export const LocalStorageKeys = {
   language: 'Language',
   theme: 'Theme',
   favorites: 'FavoriteData',
+};
+
+export const Languages = {
+  romanian: 'ro',
+  english: 'en',
+};
+
+export const StateOfDay = {
+  day: 'day',
+  night: 'night',
 };
