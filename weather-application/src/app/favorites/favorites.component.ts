@@ -24,7 +24,7 @@ export class FavoritesComponent implements OnInit {
       this.favoritesCityList = Object.keys(this.favoritesCity).map((key) => {
         return { key: key, value: this.favoritesCity[key] };
       });
-      console.log(JSON.stringify(this.favoritesCityList));
+      // console.log(JSON.stringify(this.favoritesCityList));
     }
   }
 
@@ -34,7 +34,7 @@ export class FavoritesComponent implements OnInit {
       LocalStorageKeys.favorites,
       JSON.stringify(this.favoritesCity)
     );
-    console.log(JSON.stringify(this.favoritesCity));
+    // console.log(JSON.stringify(this.favoritesCity));
     this.favoritesCityList = Object.keys(this.favoritesCity).map((key) => {
       return { key: key, value: this.favoritesCity[key] };
     });

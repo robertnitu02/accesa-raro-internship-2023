@@ -26,8 +26,8 @@ export class WeatherSearchComponent implements OnInit {
 
   favoritesCity: Dictionary<WeatherModel> = {};
   favoriteIconsPath: string[] = [
-    './../assets/images/favorite.png',
-    './../assets/images/no-favorite.png',
+    'assets/images/favorite.png',
+    'assets/images/no-favorite.png',
   ];
 
   constructor(private translate: TranslateService) {}
@@ -37,8 +37,8 @@ export class WeatherSearchComponent implements OnInit {
     // console.log(this.cityName);
     // console.log(`weatherModel:`);
     // console.log(this.weatherModel);
-    console.log('forecastModel:');
-    console.log(this.forecastData);
+    // console.log('forecastModel:');
+    // console.log(this.forecastData);
     setInterval(() => {
       this.date = new Date();
     }, 1000);
@@ -47,15 +47,13 @@ export class WeatherSearchComponent implements OnInit {
     this.initForecastList();
   }
 
+  /* --- Add to Favorite Functionality --- */
   addToFavorite() {
-    console.log('enter');
     const cityName = this.toNormalForm(this.cityName);
     if (this.favoritesCity[cityName]) {
-      console.log('deleted');
       delete this.favoritesCity[cityName];
     } else {
       if (this.weatherData) {
-        console.log('added ' + cityName);
         this.favoritesCity[cityName] = this.weatherData;
       }
     }
@@ -63,16 +61,16 @@ export class WeatherSearchComponent implements OnInit {
       LocalStorageKeys.favorites,
       JSON.stringify(this.favoritesCity)
     );
-    console.log(JSON.stringify(this.favoritesCity));
+    // console.log(JSON.stringify(this.favoritesCity));
   }
 
-  /* --- UTILS --- */
+  /* --- Utils --- */
   private initDataFromLocalStorage() {
     const favoritesData = localStorage.getItem(LocalStorageKeys.favorites);
     if (favoritesData !== null) this.favoritesCity = JSON.parse(favoritesData);
-    console.log(
-      'WeatherSearchComponent >>>' + JSON.stringify(this.favoritesCity)
-    );
+    // console.log(
+    //   'WeatherSearchComponent >>>' + JSON.stringify(this.favoritesCity)
+    // );
 
     const themeData = localStorage.getItem(LocalStorageKeys.theme);
     if (themeData) {
@@ -92,9 +90,15 @@ export class WeatherSearchComponent implements OnInit {
         this.forecastDateList.push(tmpDate);
       }
       this.showForecastList = this.forecastData.list.slice(0, this.numOfDays);
-      console.log('this.showForecastList');
-      console.log(this.showForecastList);
+      // console.log('this.showForecastList');
+      // console.log(this.showForecastList);
     }
+  }
+
+  onSliderChange($event: MatSliderChange) {
+    this.numOfDays = $event.value as number;
+    this.initForecastList();
+    // console.log($event.value);
   }
 
   toNormalForm(string: string) {
@@ -103,11 +107,5 @@ export class WeatherSearchComponent implements OnInit {
 
   beautifyTemp(temp: number) {
     return Math.floor(temp);
-  }
-
-  onSliderChange($event: MatSliderChange) {
-    this.numOfDays = $event.value as number;
-    this.initForecastList();
-    console.log($event.value);
   }
 }

@@ -30,17 +30,16 @@ export class AppComponent implements OnInit {
 
   weatherData: WeatherModel | undefined = undefined;
   forecastData: WeatherForecastModel | undefined = undefined;
+  showWeatherTimeout: any | undefined = undefined;
+
   language = 'ro';
   stateOfDay = 'day';
   theme = 'clear';
-
   city: string = '';
+  inputText: string = '';
   cityFound = true;
   showWeather = false;
   firstUse = true;
-  showWeatherTimeout: any | undefined = undefined;
-
-  inputText: string = this.city;
 
   constructor(
     private weatherService: WeatherService,
@@ -56,18 +55,6 @@ export class AppComponent implements OnInit {
     this.initWeather();
   }
 
-  sendWeatherData() {
-    if (this.inputText === '') return;
-    if (!this.firstUse && this.city === this.inputText) return;
-    if (this.city.toLowerCase() === this.inputText.toLowerCase()) return;
-    if (this.showWeatherTimeout) return;
-    if (this.firstUse) this.firstUse = false;
-
-    this.searchForWeatherCityDelay();
-    console.log(this.inputText);
-    this.getWeather(this.inputText);
-  }
-
   /* --- Init Weather first interaction ---- */
   initWeather(): void {
     if (navigator.geolocation) {
@@ -76,7 +63,7 @@ export class AppComponent implements OnInit {
           if (position) {
             this.coordinates.lat = position.coords.latitude;
             this.coordinates.lon = position.coords.longitude;
-            console.log(JSON.stringify(this.coordinates));
+            // console.log(JSON.stringify(this.coordinates));
             this.getWeatherByCoordinates(
               this.coordinates.lat,
               this.coordinates.lon
@@ -102,8 +89,7 @@ export class AppComponent implements OnInit {
         this.weatherData = res;
         this.cityFound = true;
         this.getWeatherForecast(this.city);
-        this.updateTheme();
-        console.log(`getWeather: ${JSON.stringify(this.weatherData)}`);
+        // console.log(`getWeather: ${JSON.stringify(this.weatherData)}`);
       },
       error: (error) => {
         if (this.showWeatherTimeout && !this.showWeather) {
@@ -120,8 +106,8 @@ export class AppComponent implements OnInit {
     this.weatherService.getWeatherForecast(cityName, 7).subscribe({
       next: (res) => {
         this.forecastData = res;
-        console.log(`forecastModel: `);
-        console.log(this.forecastData);
+        // console.log(`forecastModel: `);
+        // console.log(this.forecastData);
       },
       error: (error) => console.log(error.message),
     });
@@ -134,8 +120,8 @@ export class AppComponent implements OnInit {
         this.city = this.weatherData.name;
         this.inputText = this.city;
         this.getWeatherForecast(this.city);
-        console.log('getWeatherByCoordinates:');
-        console.log(this.weatherData);
+        // console.log('getWeatherByCoordinates:');
+        // console.log(this.weatherData);
       },
       error: (error) => console.log(error.message),
     });
@@ -170,10 +156,10 @@ export class AppComponent implements OnInit {
   }
 
   private updateTheme() {
-    console.log(`enter`);
+    // console.log(`enter`);
     if (this.weatherData) {
       this.theme = WeatherConditions[this.weatherData.weather[0].id.toString()];
-      console.log(`this.theme: ${this.theme}`);
+      // console.log(`this.theme: ${this.theme}`);
       localStorage.setItem(LocalStorageKeys.theme, this.theme);
       this.stateOfDay = this.weatherData.weather[0].icon.includes('d')
         ? 'day'
@@ -181,11 +167,23 @@ export class AppComponent implements OnInit {
     }
   }
 
+  sendWeatherData() {
+    if (this.inputText === '') return;
+    if (!this.firstUse && this.city === this.inputText) return;
+    if (this.city.toLowerCase() === this.inputText.toLowerCase()) return;
+    if (this.showWeatherTimeout) return;
+    if (this.firstUse) this.firstUse = false;
+
+    this.searchForWeatherCityDelay();
+    // console.log(this.inputText);
+    this.getWeather(this.inputText);
+  }
+
   changeLanguage() {
     this.language =
       this.language === 'ro' ? (this.language = 'en') : (this.language = 'ro');
     localStorage.setItem(LocalStorageKeys.language, this.language);
     this.translate.use(this.language);
-    this.getWeather(this.city, true);
+    if (this.inputText !== '') this.getWeather(this.city, true);
   }
 }
