@@ -25,6 +25,8 @@
 * [Temele aplicatiei](#temele-aplicatiei)
 * [Notite](#notite)
 * [Instalare](#instalare)
+  * [Clonare si folosirea aplicatiei cu API Key propriu](#clonare-si-folosirea-aplicatiei-cu-API-Key-propriu)
+  * [Rularea aplicatiei pe calculatorul proriu](#rularea-aplicatiei-pe-calculatorul-proriu)
 * [Tehnologii folosite](#tehnologii-folosite)
 * [Licenta](#licenta)
 
@@ -51,7 +53,7 @@ Aplicația este responsive atât pentru Desktop cât și pentru Mobile.
 ## Temele aplicatiei
 
 <p>
-Aplicația are 8 teme în functie de vremea orașului căutat. Acestea sunt: însorit, nori, praf, ceață, ploaie ușoară, ploaie cu fulgere și tunete, zăpadă și tornadă.
+Aplicația are 8 teme în functie de vremea orașului căutat. Acestea sunt: însorit, înnorat, praf, ceață, ploaie ușoară, ploaie cu fulgere și tunete, zăpadă și vreme extremă (tornadă).
 </p>
 
 ![gif](https://i.imgur.com/JUzxY1Q.gif)
@@ -84,6 +86,8 @@ Pentru a vedea notițele versiunii vizualizează pagina de [Releases](https://gi
 
 ## Instalare
 
+### Clonare si folosirea aplicatiei cu API Key propriu
+
 1. Creează-ți un cont pe [OpenWeatherAPI](https://openweathermap.org/) și obține un API Key 
 
 2. Clonează repository-ul
@@ -104,9 +108,30 @@ npm install
 weatherApiMapKey: 'API KEY';
 ```
 
+### Rularea aplicatiei pe calculatorul proriu
+
+1. Clonează repository-ul
+
+```sh
+git clone https://github.com/robertnitu02/accesa-raro-internship-2023
+```
+
+2. Instalează pachetul http-server
+
+```sh
+npm install http-server
+```
+
+3. Rulează aplicația (asigură-te că ești în `../dist/weather-application/`)
+
+```
+npm start
+```
+4. *Se poate folosi orice altă integrare (live server etc)
+
 ## Tehnologii folosite
 
-* Angular, HTML, SCSS, TypeScript, OpenWeather API, NGX Translate, LocalStorage
+* Angular, HTML, SCSS, TypeScript, Angular Material, OpenWeather API, NGX Translate, LocalStorage.
 
 ## Licenta
 
