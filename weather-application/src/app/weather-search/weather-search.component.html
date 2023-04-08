@@ -7,7 +7,7 @@
           <span class="current-day">{{ ('weather-app.days.' + (date | date: 'EEEE' | lowercase)) | translate }}</span>
           <span class="image">
             <img src="{{this.favoritesCity[toNormalForm(this.cityName)] ? favoriteIconsPath[0] : favoriteIconsPath[1]}}"
-                 alt="Favorite" (click)="addToFavorite()">
+                 alt="Favorite" (click)="addToFavorite()"/>
           </span>
         </div>
         <div class="date">

@@ -10,10 +10,10 @@
   <div class="content">
     <ng-container *ngIf="favoritesCity !== undefined">
       <div *ngFor="let city of favoritesCityList" class="item">
-        <div class="city">
+        <div class="city" (click)="removeCity(city.key)">
           <img src="https://openweathermap.org/img/wn/{{city.value.weather[0].icon}}@2x.png" alt="icon"/>
           <span class="temperature">{{beautifyTemp(city.value.main.temp)}} °C</span>
-          <span class="city-name" (click)="removeCity(city.key)">{{city.value.name}}</span>
+          <span class="city-name">{{city.value.name}}</span>
         </div>
       </div>
     </ng-container>

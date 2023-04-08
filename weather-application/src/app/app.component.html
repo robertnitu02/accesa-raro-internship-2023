@@ -18,7 +18,7 @@
       <div class="weather">
         <div class="search {{stateOfDay}}">
           <input class="input" type="text" placeholder="{{'weather-app.enter-city' | translate}}"
-                 [(ngModel)]="inputText">
+                 [(ngModel)]="inputText" (keyup.enter)="sendWeatherData()">
           <button class="button" (click)="sendWeatherData()">{{'weather-app.show-weather' | translate}}</button>
         </div>
         <ng-container *ngIf="this.firstUse && this.city === ''">

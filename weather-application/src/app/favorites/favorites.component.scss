@@ -38,19 +38,23 @@
 
     .item {
       display: flex;
-      width: 220px;
-      height: 165px;
+      width: fit-content;
+      height: fit-content;
       border: 1px solid black;
       border-radius: 1%;
       @include mat.elevation(2);
 
       .city {
         display: grid;
-        padding: 1rem;
+        padding: 0.8rem;
         align-items: center;
         grid-template-rows: 60% 20% 20%;
         color: variables.$white;
+      }
 
+      .city:hover {
+        color: variables.$brown;
+        cursor: pointer;
       }
 
       .temperature {
@@ -66,14 +70,10 @@
         font-size: 1rem;
       }
 
-      .city-name:hover {
-        color: variables.$brown;
-        cursor: pointer;
-      }
     }
 
     .item:hover {
-      background: linear-gradient(to right, rgba(102,126,234,0.15), rgba(118,75,162,0.15))
+      background: linear-gradient(to right, rgba(102,126,234,0.15), rgba(118,75,162,0.15));
     }
   }
 }

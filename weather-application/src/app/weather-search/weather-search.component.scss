@@ -37,8 +37,8 @@
           font-size: 2rem;
           line-height: 2rem;
           @media only screen and (max-width: variables.$responsive-max-width) {
-            font-size: 1.2rem;
-            line-height: 1.2rem;
+            font-size: 1rem;
+            line-height: 1rem;
           }
           font-weight: bold;
         }
@@ -229,8 +229,8 @@
             width: 75px;
             height: 75px;
             @media only screen and (max-width: variables.$responsive-max-width) {
-              width: 74px;
-              height: 59px;
+              width: 45px;
+              height: 45px;
             }
           }
 
