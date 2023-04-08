@@ -28,6 +28,15 @@
       "friday": "Vineri",
       "saturday": "Sâmbătă",
       "sunday": "Duminică"
+    },
+    "days-short": {
+      "mon": "Lun",
+      "tue": "Mar",
+      "wed": "Mie",
+      "thu": "Joi",
+      "fri": "Vin",
+      "sat": "Sâm",
+      "sun": "Dum"
     }
   }
 }

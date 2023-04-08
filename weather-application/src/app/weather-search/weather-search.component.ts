@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { WeatherModel } from '../../shared/models/weather.model';
 import { WeatherForecastModel } from '../../shared/models/weather-forecast.model';
-import { WeatherService } from '../../services/weather.service';
 import { MatSliderChange } from '@angular/material/slider';
 import { Dictionary } from 'src/shared/models/dictionary';
 import { LocalStorageKeys } from '../../shared/constants/constants';
 import { TranslateService } from '@ngx-translate/core';
+import { list } from '../../shared/models/weather-common.model';
 
 @Component({
   selector: 'app-weather-search',
@@ -13,13 +13,15 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./weather-search.component.scss'],
 })
 export class WeatherSearchComponent implements OnInit {
-  @Input() weatherModel: WeatherModel | undefined = undefined;
+  @Input() weatherData: WeatherModel | undefined = undefined;
+  @Input() forecastData: WeatherForecastModel | undefined = undefined;
   @Input() cityName: string = '';
 
-  date: string = new Date().toLocaleString();
+  date: Date = new Date();
   theme = 'clear';
 
-  forecastModel: WeatherForecastModel | undefined = undefined;
+  showForecastList: list[] = [];
+  forecastDateList: Date[] = [];
   numOfDays = 4;
 
   favoritesCity: Dictionary<WeatherModel> = {};
@@ -28,46 +30,33 @@ export class WeatherSearchComponent implements OnInit {
     './../assets/images/no-favorite.png',
   ];
 
-  constructor(
-    private weatherService: WeatherService,
-    private translate: TranslateService
-  ) {}
+  constructor(private translate: TranslateService) {}
 
   ngOnInit(): void {
     // console.log(`cityName:`);
     // console.log(this.cityName);
     // console.log(`weatherModel:`);
     // console.log(this.weatherModel);
-
-    this.getWeatherForecast(this.cityName, this.numOfDays);
+    console.log('forecastModel:');
+    console.log(this.forecastData);
     setInterval(() => {
-      // console.log(this.date);
-      this.date = new Date().toLocaleString();
+      this.date = new Date();
     }, 1000);
 
     this.initDataFromLocalStorage();
-  }
-
-  getWeatherForecast(cityName: string, numOfDays: number) {
-    this.weatherService.getWeatherForecast(cityName, numOfDays).subscribe({
-      next: (res) => {
-        this.forecastModel = res;
-        console.log(`forecastModel: `);
-        console.log(this.forecastModel);
-      },
-      error: (error) => console.log(error.message),
-    });
+    this.initForecastList();
   }
 
   addToFavorite() {
     console.log('enter');
-    if (this.favoritesCity[this.cityName]) {
+    const cityName = this.toNormalForm(this.cityName);
+    if (this.favoritesCity[cityName]) {
       console.log('deleted');
-      delete this.favoritesCity[this.cityName];
+      delete this.favoritesCity[cityName];
     } else {
-      if (this.weatherModel) {
-        console.log('added ' + this.cityName);
-        this.favoritesCity[this.cityName] = this.weatherModel;
+      if (this.weatherData) {
+        console.log('added ' + cityName);
+        this.favoritesCity[cityName] = this.weatherData;
       }
     }
     localStorage.setItem(
@@ -94,13 +83,31 @@ export class WeatherSearchComponent implements OnInit {
     }
   }
 
+  private initForecastList() {
+    if (this.forecastData) {
+      this.forecastDateList = [];
+      for (let i = 0; i < this.numOfDays; i++) {
+        let tmpDate = new Date();
+        tmpDate.setDate(tmpDate.getDate() + i);
+        this.forecastDateList.push(tmpDate);
+      }
+      this.showForecastList = this.forecastData.list.slice(0, this.numOfDays);
+      console.log('this.showForecastList');
+      console.log(this.showForecastList);
+    }
+  }
+
+  toNormalForm(string: string) {
+    return string.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+
   beautifyTemp(temp: number) {
     return Math.floor(temp);
   }
 
   onSliderChange($event: MatSliderChange) {
     this.numOfDays = $event.value as number;
-    this.getWeatherForecast(this.cityName, this.numOfDays);
+    this.initForecastList();
     console.log($event.value);
   }
 }

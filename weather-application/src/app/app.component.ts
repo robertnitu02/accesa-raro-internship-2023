@@ -7,6 +7,7 @@ import { WeatherConditions } from '../shared/constants/weather-conditions';
 import { TranslateService } from '@ngx-translate/core';
 import defaultEnLanguage from '../shared/i18n/en.json';
 import defaultRoLanguage from '../shared/i18n/ro.json';
+import { WeatherForecastModel } from '../shared/models/weather-forecast.model';
 
 export enum ViewState {
   HOME,
@@ -28,7 +29,9 @@ export class AppComponent implements OnInit {
   };
 
   weatherData: WeatherModel | undefined = undefined;
+  forecastData: WeatherForecastModel | undefined = undefined;
   language = 'ro';
+  stateOfDay = 'day';
   theme = 'clear';
 
   city: string = '';
@@ -56,6 +59,7 @@ export class AppComponent implements OnInit {
   sendWeatherData() {
     if (this.inputText === '') return;
     if (!this.firstUse && this.city === this.inputText) return;
+    if (this.city.toLowerCase() === this.inputText.toLowerCase()) return;
     if (this.showWeatherTimeout) return;
     if (this.firstUse) this.firstUse = false;
 
@@ -91,13 +95,13 @@ export class AppComponent implements OnInit {
   /* --- Get Weather functions ---- */
   getWeather(cityName: string, updateLanguage = false) {
     if (!updateLanguage) {
-      if (this.city === cityName) return;
       this.city = cityName;
     }
     this.weatherService.getWeather(cityName).subscribe({
       next: (res) => {
         this.weatherData = res;
         this.cityFound = true;
+        this.getWeatherForecast(this.city);
         this.updateTheme();
         console.log(`getWeather: ${JSON.stringify(this.weatherData)}`);
       },
@@ -112,12 +116,24 @@ export class AppComponent implements OnInit {
     });
   }
 
+  getWeatherForecast(cityName: string) {
+    this.weatherService.getWeatherForecast(cityName, 7).subscribe({
+      next: (res) => {
+        this.forecastData = res;
+        console.log(`forecastModel: `);
+        console.log(this.forecastData);
+      },
+      error: (error) => console.log(error.message),
+    });
+  }
+
   getWeatherByCoordinates(lat: number, lon: number): void {
     this.weatherService.getWeatherByCoordinates(lat, lon).subscribe({
       next: (res) => {
         this.weatherData = res;
         this.city = this.weatherData.name;
         this.inputText = this.city;
+        this.getWeatherForecast(this.city);
         console.log('getWeatherByCoordinates:');
         console.log(this.weatherData);
       },
@@ -150,7 +166,7 @@ export class AppComponent implements OnInit {
     this.showWeatherTimeout = setTimeout(() => {
       this.showWeather = true;
       this.showWeatherTimeout = undefined;
-    }, 1000);
+    }, 350);
   }
 
   private updateTheme() {
@@ -159,6 +175,9 @@ export class AppComponent implements OnInit {
       this.theme = WeatherConditions[this.weatherData.weather[0].id.toString()];
       console.log(`this.theme: ${this.theme}`);
       localStorage.setItem(LocalStorageKeys.theme, this.theme);
+      this.stateOfDay = this.weatherData.weather[0].icon.includes('d')
+        ? 'day'
+        : 'night';
     }
   }
 

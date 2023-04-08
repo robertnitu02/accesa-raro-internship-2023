@@ -14,7 +14,7 @@
       display: grid;
       grid-template-columns: 8% 8% 79% 5%;
       @media only screen and (max-width: variables.$responsive-max-width) {
-        grid-template-columns: 22% 22% 12% 22% 22%;
+        grid-template-columns: 25% 25% 35% 15%;
       }
       width: 100%;
       height: 100%;
@@ -34,7 +34,6 @@
       }
 
       .clickable:hover {
-        color: variables.$grey;
         cursor: pointer;
       }
     }
@@ -67,6 +66,8 @@
         grid-row-gap: 0.5rem;
         align-content: center;
         place-items: center;
+        border-top-left-radius: 2%;
+        border-top-right-radius: 2%;
 
         .input {
           display: block;
@@ -86,7 +87,7 @@
           align-items: center;
           padding: 6px 14px;
           border-radius: 6px;
-          color: #3D3D3D;
+          color: variables.$kind-of-grey;
           background: #fff;
           border: none;
           box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.1);
@@ -225,5 +226,13 @@
     &__footer {
       @include variables.clear-content();
     }
+  }
+
+  .day {
+    background: radial-gradient(circle at -8.9% 51.2%, rgb(255 248 0) 0%, rgb(236 210 58) 15.9%, rgb(255, 163, 77) 15.9%, rgb(216 191 11 / 70%) 24.4%, rgb(26 131 198) 24.5%, rgb(15 142 223) 66%);
+  }
+
+  .night {
+    background: radial-gradient(circle at -8.9% 51.2%, rgb(255 248 0) 0%, rgb(234 215 101) 15.9%, rgb(243 204 75) 15.9%, rgb(238 221 103 / 70%) 24.4%, rgb(32 35 37) 24.5%, rgb(32 32 32) 66%);
   }
 }

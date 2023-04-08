@@ -17,7 +17,7 @@
   <div class="content {{this.theme}}__content">
     <ng-container *ngIf="currentViewState === viewStates.HOME">
       <div class="weather">
-        <div class="search">
+        <div class="search {{stateOfDay}}">
           <input class="input" type="text" placeholder="{{'weather-app.enter-city' | translate}}"
                  [(ngModel)]="inputText">
           <button class="button" (click)="sendWeatherData()">{{'weather-app.show-weather' | translate}}</button>
@@ -29,7 +29,7 @@
           <app-city-not-found></app-city-not-found>
         </ng-container>
         <ng-container *ngIf="this.cityFound && this.showWeather">
-          <app-weather-search [weatherModel]="this.weatherData" [cityName]="this.city"></app-weather-search>
+          <app-weather-search [weatherData]="this.weatherData" [forecastData]="forecastData" [cityName]="this.city"></app-weather-search>
         </ng-container>
         <ng-container *ngIf="this.cityFound && !this.showWeather && this.city !== ''">
           <app-loading></app-loading>

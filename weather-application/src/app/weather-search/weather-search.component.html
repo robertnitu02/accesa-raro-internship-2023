@@ -1,4 +1,4 @@
-<ng-container *ngIf="weatherModel && forecastModel">
+<ng-container *ngIf="weatherData && forecastData">
   <div class="weather-search">
     <div class="general-information {{this.theme}}__background-image">
       <div></div>
@@ -6,7 +6,7 @@
         <div class="day">
           <span class="current-day">{{ ('weather-app.days.' + (date | date: 'EEEE' | lowercase)) | translate }}</span>
           <span class="image">
-            <img src="{{this.favoritesCity[this.cityName] ? favoriteIconsPath[0] : favoriteIconsPath[1]}}"
+            <img src="{{this.favoritesCity[toNormalForm(this.cityName)] ? favoriteIconsPath[0] : favoriteIconsPath[1]}}"
                  alt="Favorite" (click)="addToFavorite()">
           </span>
         </div>
@@ -14,18 +14,18 @@
           <span class="current-date">{{date | date: 'mediumDate'}}</span>
           <div class="location">
             <img src="./../../assets/images/location-pin.png" alt="pin" width="20px" height="20px" class="pin-image">
-            <span class="info-location">{{weatherModel.name}}, {{weatherModel.sys.country}}</span>
+            <span class="info-location">{{weatherData.name}}, {{weatherData.sys.country}}</span>
           </div>
         </div>
       </div>
       <div></div>
       <div class="weather-icon">
-        <img src="https://openweathermap.org/img/wn/{{weatherModel.weather[0].icon}}@2x.png" alt="icon"/>
+        <img src="https://openweathermap.org/img/wn/{{weatherData.weather[0].icon}}@2x.png" alt="icon"/>
       </div>
       <div class="weather-info">
         <div class="weather">
-          <span class="temperature">{{beautifyTemp(weatherModel.main.temp)}} °C</span>
-          <span class="details">{{weatherModel.weather[0].description}}</span>
+          <span class="temperature">{{beautifyTemp(weatherData.main.temp)}} °C</span>
+          <span class="details">{{weatherData.weather[0].description}}</span>
         </div>
       </div>
     </div>
@@ -36,19 +36,19 @@
           <span class="pressure title-text">{{'weather-app.pressure' | translate}}</span>
           <span class="humidity title-text">{{'weather-app.humidity' | translate}}</span>
           <span class="wind title-text">{{'weather-app.wind' | translate}}</span>
-          <span class="pressure-value right-text">{{weatherModel.main.pressure}}hPa</span>
-          <span class="humidity-value right-text">{{weatherModel.main.humidity}}%</span>
-          <span class="wind-value right-text">{{weatherModel.wind.speed}}km/h</span>
+          <span class="pressure-value right-text">{{weatherData.main.pressure}}hPa</span>
+          <span class="humidity-value right-text">{{weatherData.main.humidity}}%</span>
+          <span class="wind-value right-text">{{weatherData.wind.speed}}km/h</span>
         </div>
         <div></div>
       </div>
       <div class="forecast-information">
-        <div *ngFor="let forecast of forecastModel.list" class="forecast">
+        <div *ngFor="let forecast of showForecastList; let day = index" class="forecast">
           <div class="forecast-icon">
             <img src="https://openweathermap.org/img/wn/{{forecast.weather[0].icon}}@2x.png" alt="icon"
                  class="image-{{numOfDays}}"/>
           </div>
-          <span class="forecast-day">Tue</span>
+          <span class="forecast-day">{{('weather-app.days-short.' + (this.forecastDateList[day] | date: 'EEE' | lowercase)) | translate}}</span>
           <span class="forecast-temp">{{beautifyTemp(forecast.main.temp)}} °C</span>
         </div>
       </div>
@@ -70,6 +70,6 @@
     </div>
   </div>
 </ng-container>
-<ng-container *ngIf="!forecastModel && !forecastModel">
+<ng-container *ngIf="!weatherData && !forecastData">
   <app-loading></app-loading>
 </ng-container>
