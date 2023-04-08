@@ -136,4 +136,4 @@ npm start
 ## Licenta
 
 MIT License.
-Vizualizează [LICENSE](https://github.com/robertnitu02/accesa-raro-internship-2023/blob/master/LICENSE) for more information
+Vizualizează [LICENSE](https://github.com/robertnitu02/accesa-raro-internship-2023/blob/master/LICENSE) pentru informații.
