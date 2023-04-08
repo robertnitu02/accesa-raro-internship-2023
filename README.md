@@ -108,7 +108,7 @@ weatherApiMapKey: 'API KEY';
 
 * Angular, HTML, SCSS, TypeScript, OpenWeather API, NGX Translate, LocalStorage
 
-## Licentă
+## Licenta
 
-Distributed under the MIT License.
-See [LICENSE](https://github.com/robertnitu02/accesa-raro-internship-2023/blob/main/LICENSE.md) for more information.
+MIT License.
+Vizualizează [LICENSE](https://github.com/robertnitu02/accesa-raro-internship-2023/blob/master/LICENSE) for more information
