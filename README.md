@@ -10,10 +10,7 @@
     Internship 2023 @ Accesa & RaRo
     <br/>
     <br/>
-    <a href="https://github.com/robertnitu02/accesa-raro-internship-2023/tree/master/weather-application"><strong>Codul sursă »</strong></a>
-    <br/>
-    <br/>
-    <a href="https://v.b-zone.ro/accesa-internship/">versiune live</a>
+    <a href="https://github.com/robertnitu02/accesa-raro-internship-2023/tree/master/weather-application"><strong>Codul sursă</strong></a>
     .
     <a href="https://www.accesa.eu/">accesa.eu</a>
   </p>
